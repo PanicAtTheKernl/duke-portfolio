@@ -325,7 +325,7 @@ export default function EnhancedPortfolio() {
 
             <div className="flex flex-wrap justify-center gap-6 pt-8 text-slate-400">
               <a href="https://github.com/codedbyduke" className="hover:text-cyan-400 transition-colors">
-                GitHub: @miyeka
+                GitHub: @codedbyduke
               </a>
               <a href="https://linkedin.com/in/hectorpugh" className="hover:text-cyan-400 transition-colors">
                 LinkedIn: hectorpugh
