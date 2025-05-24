@@ -327,7 +327,7 @@ export default function EnhancedPortfolio() {
               <a href="https://github.com/codedbyduke" className="hover:text-cyan-400 transition-colors">
                 GitHub: @codedbyduke
               </a>
-              <a href="https://linkedin.com/in/hectorpugh" className="hover:text-cyan-400 transition-colors">
+              <a href="https://www.linkedin.com/in/hector-pugh-253016368/" className="hover:text-cyan-400 transition-colors">
                 LinkedIn: hectorpugh
               </a>
               <a href="mailto:hectorpugh08@icloud.com" className="hover:text-cyan-400 transition-colors">
