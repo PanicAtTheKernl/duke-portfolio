@@ -94,7 +94,7 @@ export default function EnhancedPortfolio() {
             
             <div className="max-w-3xl">
               <p className="text-xl text-slate-400 leading-relaxed">
-                17-year-old British developer passionate about creating elegant solutions to complex problems. 
+                British developer passionate about creating elegant solutions to complex problems. 
                 Currently mastering modern web technologies and contributing to the open-source ecosystem.
               </p>
             </div>
