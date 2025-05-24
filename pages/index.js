@@ -313,7 +313,7 @@ export default function EnhancedPortfolio() {
               </a>
               
               <a
-                href="https://github.com/miyeka"
+                href="https://github.com/codedbyduke"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 hover:border-slate-500 px-8 py-4 rounded-full text-slate-300 hover:text-white font-semibold transition-all duration-300 hover:scale-105"
@@ -324,7 +324,7 @@ export default function EnhancedPortfolio() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-6 pt-8 text-slate-400">
-              <a href="https://github.com/miyeka" className="hover:text-cyan-400 transition-colors">
+              <a href="https://github.com/codedbyduke" className="hover:text-cyan-400 transition-colors">
                 GitHub: @miyeka
               </a>
               <a href="https://linkedin.com/in/hectorpugh" className="hover:text-cyan-400 transition-colors">
