@@ -94,8 +94,7 @@ export default function EnhancedPortfolio() {
             
             <div className="max-w-3xl">
               <p className="text-xl text-slate-400 leading-relaxed">
-                British developer passionate about creating elegant solutions to complex problems. 
-                Currently mastering modern web technologies and contributing to the open-source ecosystem.
+                British developer who enjoys cracking complex problems by crafting clear, dependable solutions. I mostly work with modern web tech like JavaScript, TypeScript, React, and Node.js, and I’m always sharpening my skills in backend systems and cloud deployment. I’m quite keen on writing tidy, maintainable code and making developer workflows as smooth as possible. Beyond software, I’ve got a real passion for the hardware side of things — I love mucking about with different electronic gadgets, fiddling with circuits, and figuring out what makes everything tick under the bonnet. When I get the chance, I contribute to open-source projects and like keeping my finger on the pulse of the latest tools and best practices in the dev world.
               </p>
             </div>
 
