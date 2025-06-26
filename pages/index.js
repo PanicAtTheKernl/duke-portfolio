@@ -14,57 +14,36 @@ import {
   Zap,
   Star,
   MousePointer,
-  Sparkles
+  Sparkles,
+  Users,
+  Target,
+  Award,
+  BookOpen,
+  Coffee,
+  Lightbulb,
+  Heart,
+  MapPin,
+  Phone,
+  Download,
+  User,
+  Briefcase,
+  GraduationCap,
+  Camera,
+  Music,
+  Gamepad2,
+  Settings,
+  Shield,
+  Wrench,
+  Bot,
+  TrendingUp,
+  CheckCircle,
+  ArrowRight,
+  Quote,
+  Menu,
+  X
 } from 'lucide-react';
 
-const FloatingParticle = ({ delay = 0 }) => (
-  <div 
-    className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-pulse opacity-60"
-    style={{
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      animationDelay: `${delay}s`,
-      animationDuration: `${3 + Math.random() * 2}s`
-    }}
-  />
-);
-
-const InteractiveGrid = () => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const gridRef = useRef(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (gridRef.current) {
-        const rect = gridRef.current.getBoundingClientRect();
-        setMousePos({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
-      }
-    };
-
-    const grid = gridRef.current;
-    if (grid) {
-      grid.addEventListener('mousemove', handleMouseMove);
-      return () => grid.removeEventListener('mousemove', handleMouseMove);
-    }
-  }, []);
-
-  return (
-    <div 
-      ref={gridRef}
-      className="absolute inset-0 opacity-20 pointer-events-none"
-      style={{
-        backgroundImage: `radial-gradient(circle at ${mousePos.x}px ${mousePos.y}px, rgba(34, 211, 238, 0.3) 0%, transparent 50%), linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px), linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px)`,
-        backgroundSize: '50px 50px',
-        transition: 'background-image 0.1s ease-out'
-      }}
-    />
-  );
-};
-
-const TypewriterText = ({ text, delay = 100 }) => {
+const TypewriterText = ({ text, delay = 50 }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
@@ -94,585 +73,570 @@ const TypewriterText = ({ text, delay = 100 }) => {
   );
 };
 
-const MagneticButton = ({ children, className = "", href, external = false, ...props }) => {
+const ServiceCard = ({ icon: Icon, title, description, features, gradient }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const buttonRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    if (!buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    const deltaX = (e.clientX - centerX) * 0.2;
-    const deltaY = (e.clientY - centerY) * 0.2;
-    
-    setMousePos({ x: deltaX, y: deltaY });
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setMousePos({ x: 0, y: 0 });
-  };
-
-  const Component = href ? 'a' : 'button';
-  const linkProps = href ? { 
-    href, 
-    ...(external && { target: "_blank", rel: "noopener noreferrer" })
-  } : {};
-
-  return (
-    <Component
-      ref={buttonRef}
-      className={`group relative overflow-hidden transition-all duration-300 ${className}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
-      }}
-      {...linkProps}
-      {...props}
-    >
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-emerald-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
-      <div className="relative z-10">
-        {children}
-      </div>
-      {isHovered && (
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 to-emerald-400/10 animate-pulse"></div>
-      )}
-    </Component>
-  );
-};
-
-const GlowingSkillBadge = ({ skill, level }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  
-  return (
-    <div 
-      className="group relative bg-gradient-to-r from-slate-800/90 to-slate-700/90 rounded-full px-6 py-3 border border-cyan-500/20 hover:border-cyan-400/60 transition-all duration-500 hover:scale-110 cursor-pointer backdrop-blur-sm"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-emerald-500/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse">
-        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/20 to-emerald-400/20 blur-md"></div>
-      </div>
-      <span className="relative z-10 text-cyan-300 font-medium">{skill}</span>
-      <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-0 group-hover:scale-100">
-        <Star className="w-3 h-3 text-white m-0.5" />
-      </div>
-      {isHovered && (
-        <>
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-ping"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${i * 0.1}s`,
-                animationDuration: '1s'
-              }}
-            />
-          ))}
-        </>
-      )}
-    </div>
-  );
-};
-
-const HolographicProjectCard = ({ title, description, technologies, isHighlight = false, link }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const cardRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setMousePos({ x, y });
-  };
 
   return (
     <div 
-      ref={cardRef}
-      className={`group relative overflow-hidden rounded-3xl border transition-all duration-700 hover:scale-[1.03] cursor-pointer ${
-        isHighlight 
-          ? 'bg-gradient-to-br from-slate-800/90 to-slate-900/90 border-cyan-400/40 shadow-2xl shadow-cyan-500/20' 
-          : 'bg-slate-800/70 border-slate-700/50 hover:border-slate-600/70'
-      } backdrop-blur-sm`}
+      className="group relative bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-800 hover:border-orange-500/50 transition-all duration-500 hover:transform hover:scale-[1.02]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onMouseMove={handleMouseMove}
     >
-      {/* Holographic background effect */}
-      <div 
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-        style={{
-          background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(34, 211, 238, 0.15) 0%, rgba(16, 185, 129, 0.1) 25%, transparent 50%)`
-        }}
-      />
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-slate-900/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       
-      {/* Animated border */}
-      <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-        <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-500/20 via-emerald-500/20 to-purple-500/20 animate-pulse"></div>
-      </div>
-
-      {/* Floating particles */}
-      {isHovered && (
-        <div className="absolute inset-0">
-          {[...Array(12)].map((_, i) => (
-            <FloatingParticle key={i} delay={i * 0.2} />
-          ))}
-        </div>
-      )}
-
-      <div className="relative p-8 z-10">
-        <div className="flex items-start justify-between mb-4">
-          <h3 className={`text-2xl font-bold mb-3 ${isHighlight ? 'text-cyan-300' : 'text-white'} group-hover:text-cyan-300 transition-colors duration-300`}>
-            {title}
-          </h3>
-          {link && (
-            <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-              <ExternalLink className="w-5 h-5 text-cyan-400" />
-            </div>
-          )}
+      <div className="relative z-10">
+        <div className={`w-16 h-16 bg-gradient-to-r ${gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+          <Icon className="w-8 h-8 text-white" />
         </div>
         
-        <p className="text-slate-300 leading-relaxed mb-6 group-hover:text-slate-200 transition-colors duration-300">
+        <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-orange-400 transition-colors duration-300">
+          {title}
+        </h3>
+        
+        <p className="text-slate-400 mb-6 leading-relaxed">
           {description}
         </p>
         
-        {technologies && (
-          <div className="flex flex-wrap gap-2">
-            {technologies.map((tech, index) => (
-              <span 
-                key={index} 
-                className="px-3 py-1.5 text-sm bg-slate-700/60 text-cyan-400 rounded-lg border border-slate-600/40 backdrop-blur-sm group-hover:bg-slate-600/60 group-hover:border-cyan-500/40 transition-all duration-300"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Sparkle effect */}
-        {isHovered && (
-          <div className="absolute top-4 right-4">
-            <Sparkles className="w-6 h-6 text-cyan-400 animate-spin" />
-          </div>
-        )}
+        <ul className="space-y-2">
+          {features.map((feature, index) => (
+            <li key={index} className="flex items-center gap-3 text-slate-300">
+              <CheckCircle className="w-4 h-4 text-orange-500 flex-shrink-0" />
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
       </div>
+      
+      {isHovered && (
+        <div className="absolute top-4 right-4">
+          <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+        </div>
+      )}
     </div>
   );
 };
 
-const PulsingOrb = ({ size = 'w-4 h-4', color = 'bg-cyan-400', delay = 0 }) => (
-  <div 
-    className={`${size} ${color} rounded-full animate-pulse relative`}
-    style={{ animationDelay: `${delay}s` }}
-  >
-    <div className={`absolute inset-0 ${color} rounded-full animate-ping opacity-30`}></div>
+const ProjectCard = ({ title, description, tech, type, status = "Completed" }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div 
+      className="bg-slate-900/90 backdrop-blur-sm rounded-xl p-6 border border-slate-800 hover:border-orange-500/50 transition-all duration-300 hover:transform hover:scale-[1.02] group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
+          <span className="text-sm font-medium text-orange-400 uppercase tracking-wide">{type}</span>
+        </div>
+        <span className="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded-full">{status}</span>
+      </div>
+      
+      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors duration-300">
+        {title}
+      </h3>
+      
+      <p className="text-slate-400 mb-4 leading-relaxed">
+        {description}
+      </p>
+      
+      <div className="flex flex-wrap gap-2">
+        {tech.map((item, index) => (
+          <span key={index} className="text-xs bg-slate-800/80 text-slate-300 px-3 py-1 rounded-full border border-slate-700">
+            {item}
+          </span>
+        ))}
+      </div>
+      
+      {isHovered && (
+        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <ArrowRight className="w-4 h-4 text-orange-500" />
+        </div>
+      )}
+    </div>
+  );
+};
+
+const TestimonialCard = ({ text, author, role, rating = 5 }) => (
+  <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl p-6 border border-slate-800">
+    <div className="flex items-center gap-1 mb-4">
+      {[...Array(rating)].map((_, i) => (
+        <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />
+      ))}
+    </div>
+    
+    <Quote className="w-8 h-8 text-orange-500/30 mb-4" />
+    
+    <p className="text-slate-300 mb-4 leading-relaxed italic">
+      "{text}"
+    </p>
+    
+    <div className="flex items-center gap-3">
+      <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center">
+        <User className="w-5 h-5 text-white" />
+      </div>
+      <div>
+        <div className="font-semibold text-white">{author}</div>
+        <div className="text-sm text-slate-400">{role}</div>
+      </div>
+    </div>
   </div>
 );
 
-export default function UltraModernPortfolio() {
-  const [scrollY, setScrollY] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [currentSection, setCurrentSection] = useState('hero');
-  
+const Navigation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
-    
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
     };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    setIsOpen(false);
+  };
+
+  return (
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-900/95 backdrop-blur-md border-b border-slate-800' : 'bg-transparent'}`}>
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+              <Terminal className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xl font-bold text-white">Duke</span>
+          </div>
+          
+          <div className="hidden md:flex items-center gap-8">
+            {['about', 'services', 'portfolio', 'contact'].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item)}
+                className="text-slate-300 hover:text-orange-400 transition-colors duration-300 capitalize font-medium"
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+          
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-white"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+        
+        {isOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 py-4">
+            <div className="flex flex-col gap-4 px-6">
+              {['about', 'services', 'portfolio', 'contact'].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item)}
+                  className="text-slate-300 hover:text-orange-400 transition-colors duration-300 capitalize font-medium text-left"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default function DukeProfessionalPortfolio() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
-      {/* Interactive Grid Background */}
-      <InteractiveGrid />
+    <div className="min-h-screen bg-slate-950 text-white overflow-hidden">
+      <Navigation />
       
-      {/* Animated background elements */}
+      {/* Animated background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* Large glowing orbs */}
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-r from-cyan-500/15 to-emerald-500/15 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-gradient-to-r from-emerald-500/15 to-purple-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-0 right-1/3 w-60 h-60 bg-gradient-to-r from-purple-500/15 to-cyan-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-0 right-1/3 w-60 h-60 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
         
-        {/* Floating particles */}
-        {[...Array(20)].map((_, i) => (
-          <FloatingParticle key={i} delay={i * 0.3} />
-        ))}
+        {/* Grid pattern */}
+        <div className="absolute inset-0 opacity-5" style={{
+          backgroundImage: 'linear-gradient(90deg, rgba(251, 146, 60, 0.1) 1px, transparent 1px), linear-gradient(rgba(251, 146, 60, 0.1) 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
         
-        {/* Mouse trail effect */}
+        {/* Mouse follower */}
         <div 
-          className="absolute w-4 h-4 bg-cyan-400/30 rounded-full blur-sm pointer-events-none transition-all duration-100 ease-out"
+          className="absolute w-4 h-4 bg-orange-500/20 rounded-full blur-sm pointer-events-none transition-all duration-100 ease-out"
           style={{
             left: mousePos.x - 8,
             top: mousePos.y - 8,
-            transform: `scale(${scrollY * 0.001 + 1})`
           }}
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Hero Section */}
-        <header className="min-h-screen flex flex-col justify-center relative">
-          <div className="space-y-12">
+        <section className="min-h-screen flex items-center justify-center pt-20">
+          <div className="text-center space-y-8 max-w-4xl">
+            <div className="space-y-4">
+              <div className="flex items-center justify-center gap-3 mb-8">
+                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                  <Terminal className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-xl text-slate-400">Professional Tech Solutions</span>
+              </div>
+              
+              <h1 className="text-6xl md:text-8xl font-black tracking-tight">
+                <span className="bg-gradient-to-r from-orange-400 via-red-400 to-orange-300 bg-clip-text text-transparent">
+                  Duke
+                </span>
+              </h1>
+              
+              <div className="text-2xl md:text-3xl text-slate-300 font-light">
+                <TypewriterText text="Tech Repair • Coding • Gaming Solutions" delay={80} />
+              </div>
+            </div>
+            
+            <p className="text-xl text-slate-400 leading-relaxed max-w-3xl mx-auto">
+              17-year-old tech specialist delivering <span className="text-orange-400 font-semibold">no-BS solutions</span> in hardware repair, 
+              Linux development, and performance optimization. Zero shortcuts, maximum results.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+              <button 
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/25 flex items-center gap-3 justify-center"
+              >
+                <Mail className="w-5 h-5" />
+                Get Solutions
+              </button>
+              
+              <button 
+                onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-slate-800/80 hover:bg-slate-700/80 border-2 border-slate-700 hover:border-orange-500 px-8 py-4 rounded-xl text-slate-300 hover:text-white font-bold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm flex items-center gap-3 justify-center"
+              >
+                <Code className="w-5 h-5" />
+                View Work
+              </button>
+            </div>
+            
+            <div className="flex justify-center items-center gap-8 pt-8 text-slate-500">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span>Available</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4" />
+                <span>UK Based</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Gamepad2 className="w-4 h-4" />
+                <span>Gaming Enthusiast</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section id="about" className="py-20 space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-white">About Me</h2>
+            <p className="text-xl text-slate-400">Direct approach, proven results</p>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="relative">
-                <h1 className="text-7xl md:text-9xl font-black tracking-tight">
-                  <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-300 bg-clip-text text-transparent animate-pulse">
-                    Hector Pugh
-                  </span>
-                </h1>
-                {/* Glowing effect behind name */}
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-emerald-400/20 to-cyan-300/20 blur-3xl -z-10 animate-pulse"></div>
-              </div>
-              
-              <div className="text-3xl md:text-4xl text-slate-300 font-light">
-                <TypewriterText text="Full-Stack Developer & Digital Architect" delay={60} />
-              </div>
-            </div>
-            
-            <div className="max-w-4xl">
-              <p className="text-2xl text-slate-400 leading-relaxed">
-                I'm a British developer who crafts <span className="text-cyan-400 font-semibold">extraordinary digital experiences</span> with cutting-edge technology. 
-                Specializing in React, TypeScript, and modern cloud architectures, I transform complex problems into elegant solutions.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-6 pt-6">
-              <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-slate-800/80 to-slate-700/80 rounded-full border border-emerald-500/40 backdrop-blur-sm">
-                <PulsingOrb size="w-3 h-3" color="bg-emerald-400" />
-                <span className="text-slate-300 font-medium">Available for opportunities</span>
-              </div>
-              
-              <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-slate-800/80 to-slate-700/80 rounded-full border border-cyan-500/40 backdrop-blur-sm">
-                <Globe className="w-5 h-5 text-cyan-400" />
-                <span className="text-slate-300 font-medium">England, UK</span>
-              </div>
-              
-              <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-slate-800/80 to-slate-700/80 rounded-full border border-purple-500/40 backdrop-blur-sm">
-                <Zap className="w-5 h-5 text-purple-400" />
-                <span className="text-slate-300 font-medium">Open Source Contributor</span>
-              </div>
-            </div>
-
-            {/* Interactive CTA buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 pt-8">
-              <MagneticButton
-                href="mailto:hectorpugh08@icloud.com"
-                className="flex items-center gap-3 bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 px-10 py-5 rounded-full text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30"
-              >
-                <Mail className="w-6 h-6" />
-                Let's Create Magic
-              </MagneticButton>
-              
-              <MagneticButton
-                href="https://github.com/codedbyduke"
-                external
-                className="flex items-center gap-3 bg-slate-800/80 hover:bg-slate-700/80 border-2 border-slate-600 hover:border-cyan-500 px-10 py-5 rounded-full text-slate-300 hover:text-white font-bold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm"
-              >
-                <Code className="w-6 h-6" />
-                Explore My Code
-              </MagneticButton>
-            </div>
-          </div>
-
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer">
-            <div className="relative">
-              <ChevronDown className="w-8 h-8 text-cyan-400" />
-              <div className="absolute inset-0 w-8 h-8 text-cyan-400 animate-ping opacity-30">
-                <ChevronDown className="w-8 h-8" />
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Enhanced About Section */}
-        <section className="py-32 space-y-16">
-          <div className="text-center space-y-6">
-            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
-              Why Choose Excellence?
-            </h2>
-            <p className="text-2xl text-slate-400 max-w-4xl mx-auto">
-              I don't just write code—I architect digital experiences that push boundaries and exceed expectations.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-10">
-            {[
-              {
-                icon: Code,
-                title: "Cutting-Edge Technology",
-                description: "Master of React, Next.js, TypeScript, and emerging web technologies. I stay ahead of the curve to deliver future-proof solutions.",
-                gradient: "from-cyan-500 to-emerald-500"
-              },
-              {
-                icon: Terminal,
-                title: "System Architecture",
-                description: "Deep Linux expertise with Arch Linux mastery, Docker orchestration, and cloud-native development practices.",
-                gradient: "from-emerald-500 to-purple-500"
-              },
-              {
-                icon: Sparkles,
-                title: "Innovation Mindset",
-                description: "Active open-source contributor with a passion for accessibility, performance optimization, and community impact.",
-                gradient: "from-purple-500 to-cyan-500"
-              }
-            ].map((item, index) => (
-              <div key={index} className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-emerald-500/10 to-purple-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-700 opacity-0 group-hover:opacity-100"></div>
-                <div className="relative p-10 rounded-3xl bg-gradient-to-br from-slate-800/90 to-slate-900/90 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-700 hover:transform hover:scale-105 backdrop-blur-sm">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${item.gradient} rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500`}>
-                    <item.icon className="w-8 h-8 text-white" />
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-2xl blur-xl"></div>
+                <div className="relative bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-800">
+                  <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mb-6">
+                    <User className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors duration-300">
-                    {item.title}
-                  </h3>
-                  <p className="text-slate-400 leading-relaxed text-lg group-hover:text-slate-300 transition-colors duration-300">
-                    {item.description}
+                  <h3 className="text-2xl font-bold text-white mb-4">The Direct Approach</h3>
+                  <p className="text-slate-300 leading-relaxed">
+                    I'm Duke, 17 years old, and I don't believe in sugar-coating or taking shortcuts. 
+                    When your tech breaks, when your code fails, or when your system needs optimization—I deliver solutions that work.
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Enhanced Technical Skills */}
-        <section className="py-32 space-y-16">
-          <div className="text-center">
-            <h2 className="text-5xl font-bold text-white mb-6">Technical Mastery</h2>
-            <p className="text-2xl text-slate-400">The tools and technologies I wield to create digital magic</p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-16">
-            <div className="space-y-8">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="p-3 bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-xl">
-                  <Code className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-3xl font-bold text-white">Frontend Sorcery</h3>
-              </div>
-              <div className="flex flex-wrap gap-4">
-                {['React & Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Three.js', 'WebGL', 'GraphQL'].map((skill, index) => (
-                  <GlowingSkillBadge key={index} skill={skill} />
-                ))}
-              </div>
             </div>
-
-            <div className="space-y-8">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="p-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-xl">
-                  <Server className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-3xl font-bold text-white">Backend Wizardry</h3>
+            
+            <div className="space-y-6">
+              <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl p-6 border border-slate-800">
+                <h4 className="text-lg font-semibold text-orange-400 mb-3">Core Philosophy</h4>
+                <p className="text-slate-300">
+                  "Windows is dead to me. Linux is life. Hardware should be pushed to its limits, 
+                  and software should be crafted with precision. No compromises, no excuses."
+                </p>
               </div>
-              <div className="flex flex-wrap gap-4">
-                {['Node.js', 'Python & FastAPI', 'Docker & K8s', 'AWS & Azure', 'PostgreSQL', 'Redis', 'Microservices'].map((skill, index) => (
-                  <GlowingSkillBadge key={index} skill={skill} />
-                ))}
+              
+              <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl p-6 border border-slate-800">
+                <h4 className="text-lg font-semibold text-orange-400 mb-3">What Drives Me</h4>
+                <p className="text-slate-300">
+                  Breaking down complex problems, optimizing performance, and building custom solutions 
+                  from scratch. Every project gets my full attention and expertise.
+                </p>
+              </div>
+              
+              <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl p-6 border border-slate-800">
+                <h4 className="text-lg font-semibold text-orange-400 mb-3">Battle Station</h4>
+                <div className="flex items-center gap-3 text-slate-300">
+                  <Monitor className="w-5 h-5 text-orange-500" />
+                  <span>Lenovo ThinkPad T480 • i7-8650U • 16GB RAM</span>
+                </div>
+                <p className="text-slate-400 text-sm mt-2">Solid, reliable, no BS—just like my work.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Enhanced Development Setup */}
-        <section className="py-32">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-white mb-6">Battle Station</h2>
-            <p className="text-2xl text-slate-400">Engineered for peak performance and productivity</p>
+        {/* Services Section */}
+        <section id="services" className="py-20 space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-white">Services</h2>
+            <p className="text-xl text-slate-400">Expertise that delivers results</p>
           </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <ServiceCard
+              icon={Wrench}
+              title="Tech Repair"
+              description="Hardware diagnostics, component replacement, and system optimization. I fix what others can't."
+              features={[
+                "Hardware diagnostics & repair",
+                "Component upgrades & replacements",
+                "Performance optimization",
+                "System troubleshooting",
+                "Custom build consultations"
+              ]}
+              gradient="from-orange-500 to-red-500"
+            />
+            
+            <ServiceCard
+              icon={Terminal}
+              title="Development"
+              description="Linux-focused software development, automation, and custom tool creation. Built right, built to last."
+              features={[
+                "Linux system development",
+                "Bot creation & automation",
+                "Custom script development",
+                "API integrations",
+                "Performance optimization"
+              ]}
+              gradient="from-red-500 to-orange-500"
+            />
+            
+            <ServiceCard
+              icon={Gamepad2}
+              title="Gaming Solutions"
+              description="Performance tuning, custom configurations, and gaming setup optimization for competitive edge."
+              features={[
+                "Gaming PC optimization",
+                "Custom configuration setups",
+                "Performance tuning",
+                "Competitive gaming prep",
+                "Hardware recommendations"
+              ]}
+              gradient="from-orange-600 to-red-600"
+            />
+          </div>
+        </section>
 
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-emerald-500/10 to-purple-500/10 rounded-3xl blur-2xl"></div>
-            <div className="relative bg-gradient-to-r from-slate-800/90 to-slate-900/90 rounded-3xl p-12 border border-slate-700/50 backdrop-blur-sm">
-              <div className="flex flex-col xl:flex-row items-center gap-12">
-                <div className="flex-shrink-0 relative">
-                  <div className="w-40 h-40 bg-gradient-to-br from-cyan-500/30 to-emerald-500/30 rounded-3xl flex items-center justify-center border border-cyan-500/40 relative overflow-hidden">
-                    <Monitor className="w-20 h-20 text-cyan-400 relative z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-emerald-400/20 animate-pulse"></div>
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full animate-pulse"></div>
-                </div>
-                
-                <div className="flex-1 space-y-8">
-                  <h3 className="text-4xl font-bold text-white">ThinkPad T480 Development Beast</h3>
-                  
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div className="space-y-4">
-                      {[
-                        { icon: Cpu, text: "Intel Core i7-8650U (Quad-Core)", color: "text-cyan-400" },
-                        { icon: null, text: "16GB DDR4 RAM @ 2400MHz", color: "text-emerald-400" },
-                        { icon: null, text: "512GB NVMe SSD", color: "text-purple-400" }
-                      ].map((item, index) => (
-                        <div key={index} className="flex items-center gap-4 group">
-                          {item.icon ? (
-                            <item.icon className={`w-6 h-6 ${item.color} group-hover:scale-110 transition-transform duration-300`} />
-                          ) : (
-                            <div className={`w-6 h-6 ${item.color.replace('text-', 'bg-')} rounded-sm group-hover:scale-110 transition-transform duration-300`}></div>
-                          )}
-                          <span className="text-slate-300 text-lg group-hover:text-white transition-colors duration-300">{item.text}</span>
-                        </div>
-                      ))}
-                    </div>
+        {/* Portfolio Section */}
+        <section id="portfolio" className="py-20 space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-white">Portfolio</h2>
+            <p className="text-xl text-slate-400">Projects that prove the point</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <ProjectCard
+              title="Custom Linux Bot Framework"
+              description="Built a comprehensive Discord bot framework with advanced automation features and Linux system integration."
+              tech={["Python", "Discord.py", "Linux", "SQLite", "API Integration"]}
+              type="Development"
+              status="Active"
+            />
+            
+            <ProjectCard
+              title="Hardware Diagnostic Suite"
+              description="Developed custom diagnostic tools for rapid hardware fault detection and performance analysis."
+              tech={["Python", "System Monitoring", "Hardware APIs", "Logging"]}
+              type="Tech Repair"
+              status="Completed"
+            />
+            
+            <ProjectCard
+              title="Gaming Performance Optimizer"
+              description="Created automated scripts for optimizing gaming performance across multiple system configurations."
+              tech={["Bash", "System Optimization", "Performance Monitoring"]}
+              type="Gaming"
+              status="Ongoing"
+            />
+            
+            <ProjectCard
+              title="Client System Overhauls"
+              description="Complete system rebuilds and optimizations for improved performance and reliability."
+              tech={["Hardware Repair", "Linux Installation", "Performance Tuning"]}
+              type="Tech Repair"
+              status="Multiple Projects"
+            />
+            
+            <ProjectCard
+              title="Automation Scripts Collection"
+              description="Suite of productivity and system maintenance scripts for Linux environments."
+              tech={["Bash", "Python", "Cron", "System Administration"]}
+              type="Development"
+              status="Expanding"
+            />
+            
+            <ProjectCard
+              title="Custom Tool Development"
+              description="Bespoke software solutions for specific client needs and workflow optimization."
+              tech={["Python", "Custom APIs", "Database Integration"]}
+              type="Development"
+              status="Various"
+            />
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section className="py-20 space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-white">Client Feedback</h2>
+            <p className="text-xl text-slate-400">Results speak louder than words</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <TestimonialCard
+              text="Duke fixed my laptop when three other repair shops couldn't. Direct, professional, and actually knows what he's doing."
+              author="Sarah M."
+              role="Local Business Owner"
+              rating={5}
+            />
+            
+            <TestimonialCard
+              text="Needed a custom bot for my server. Duke delivered exactly what I asked for, no fluff, just results."
+              author="Gaming Community Lead"
+              role="Discord Server Admin"
+              rating={5}
+            />
+            
+            <TestimonialCard
+              text="System was running like garbage. Duke optimized everything and now it's faster than when I bought it."
+              author="Tech Enthusiast"
+              role="Hardware Collector"
+              rating={5}
+            />
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-20 space-y-12">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-white">Get In Touch</h2>
+            <p className="text-xl text-slate-400">Ready to solve your tech problems?</p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-2xl blur-2xl"></div>
+              <div className="relative bg-slate-900/90 backdrop-blur-sm rounded-2xl p-8 border border-slate-800">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-6">
+                    <h3 className="text-2xl font-bold text-white">Let's Talk Solutions</h3>
+                    <p className="text-slate-400">
+                      Got a tech problem that needs solving? Need custom development work? 
+                      Want to optimize your gaming setup? Let's cut through the BS and get it done.
+                    </p>
                     
                     <div className="space-y-4">
-                      {[
-                        { icon: Terminal, text: "Arch Linux + i3wm", color: "text-cyan-400" },
-                        { icon: Code, text: "VSCode + Neovim", color: "text-emerald-400" },
-                        { icon: null, text: "Dual 4K Monitor Setup", color: "text-purple-400" }
-                      ].map((item, index) => (
-                        <div key={index} className="flex items-center gap-4 group">
-                          {item.icon ? (
-                            <item.icon className={`w-6 h-6 ${item.color} group-hover:scale-110 transition-transform duration-300`} />
-                          ) : (
-                            <div className={`w-6 h-6 ${item.color.replace('text-', 'bg-')} rounded-sm group-hover:scale-110 transition-transform duration-300`}></div>
-                          )}
-                          <span className="text-slate-300 text-lg group-hover:text-white transition-colors duration-300">{item.text}</span>
-                        </div>
-                      ))}
+                      <div className="flex items-center gap-3">
+                        <Mail className="w-5 h-5 text-orange-500" />
+                        <span className="text-slate-300">Available for project discussions</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Globe className="w-5 h-5 text-orange-500" />
+                        <span className="text-slate-300">Remote work preferred</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Zap className="w-5 h-5 text-orange-500" />
+                        <span className="text-slate-300">Quick turnaround times</span>
+                      </div>
                     </div>
                   </div>
-
-                  <p className="text-slate-400 leading-relaxed text-lg">
-                    This powerhouse setup delivers the perfect fusion of portability and performance. The Arch Linux 
-                    environment keeps me intimately connected with system internals, while i3wm provides a 
-                    lightning-fast, keyboard-driven workflow that maximizes productivity and minimizes distractions.
-                  </p>
+                  
+                  <div className="space-y-6">
+                    <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                      <h4 className="font-semibold text-orange-400 mb-2">What I Do Best</h4>
+                      <ul className="text-slate-300 space-y-1 text-sm">
+                        <li>• Hardware repair & diagnostics</li>
+                        <li>• Linux development & automation</li>
+                        <li>• Gaming optimization</li>
+                        <li>• Custom tool development</li>
+                        <li>• System troubleshooting</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                      <h4 className="font-semibold text-orange-400 mb-2">Work Style</h4>
+                      <p className="text-slate-300 text-sm">
+                        Direct communication, transparent pricing, and results-focused approach. 
+                        No corporate nonsense, just professional service.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Enhanced Featured Projects */}
-        <section className="py-32 space-y-16">
-          <div className="text-center">
-            <h2 className="text-5xl font-bold text-white mb-6">Digital Masterpieces</h2>
-            <p className="text-2xl text-slate-400">Real-world applications that showcase innovation and technical excellence</p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-10">
-            <HolographicProjectCard
-              title="Enterprise Portfolio Platform"
-              description="A comprehensive portfolio website built with Next.js, featuring dynamic routing, responsive design, and seamless GitHub integration for live project updates. Implements modern SEO practices and performance optimization."
-              technologies={['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'GitHub API']}
-              isHighlight={true}
-              link="https://github.com/codedbyduke"
-            />
-            
-            <HolographicProjectCard
-              title="Open Source React A11y Library"
-              description="Contributed critical accessibility improvements to a popular React component library, enhancing keyboard navigation and screen reader support. Improved developer experience with comprehensive documentation."
-              technologies={['React', 'TypeScript', 'Jest', 'Accessibility', 'Documentation']}
-            />
-            
-            <HolographicProjectCard
-              title="Discord-Minecraft Integration Bot"
-              description="Developed a sophisticated Discord bot with real-time Minecraft server integration using Mineflayer. Features include player statistics, server monitoring, and automated notifications with robust error handling."
-              technologies={['Node.js', 'Discord.js', 'Mineflayer', 'WebSocket', 'MongoDB']}
-            />
-            
-            <HolographicProjectCard
-              title="Linux System Automation Suite"
-              description="Created a collection of Bash scripts and Python tools for automated system maintenance, backup management, and development environment setup. Includes comprehensive logging and error recovery."
-              technologies={['Python', 'Bash', 'Cron', 'Systemd', 'Docker']}
-            />
-          </div>
-        </section>
-
-        {/* Enhanced Call to Action */}
-        <section className="py-32">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-emerald-500/10 to-purple-500/10 rounded-3xl blur-3xl"></div>
-            <div className="relative text-center space-y-12 bg-gradient-to-br from-slate-800/90 to-slate-900/90 rounded-3xl p-16 border border-slate-700/50 backdrop-blur-sm">
-              <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-                Ready to Build the 
-                <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent"> Future</span>?
-              </h2>
-              <p className="text-2xl text-slate-400 max-w-3xl mx-auto">
-                I'm actively seeking opportunities to contribute to groundbreaking projects and collaborate with visionary teams.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-6 justify-center pt-12">
-                <MagneticButton
-                  href="mailto:hectorpugh08@icloud.com"
-                  className="flex items-center gap-4 bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 px-12 py-6 rounded-full text-white font-bold text-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30"
-                >
-                  <Mail className="w-6 h-6" />
-                  Start a Conversation
-                  <Sparkles className="w-5 h-5 animate-spin" />
-                </MagneticButton>
                 
-                <MagneticButton
-                  href="https://github.com/codedbyduke"
-                  external
-                  className="flex items-center gap-4 bg-slate-800/80 hover:bg-slate-700/80 border-2 border-slate-600 hover:border-cyan-500 px-12 py-6 rounded-full text-slate-300 hover:text-white font-bold text-xl transition-all duration-300 hover:scale-105 backdrop-blur-sm"
-                >
-                  <Github className="w-6 h-6" />
-                  Explore My Universe
-                  <ExternalLink className="w-5 h-5" />
-                </MagneticButton>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-8 pt-12 text-slate-400">
-                <MagneticButton
-                  href="https://github.com/codedbyduke"
-                  external
-                  className="flex items-center gap-2 hover:text-cyan-400 transition-colors duration-300 text-lg"
-                >
-                  <Github className="w-5 h-5" />
-                  @codedbyduke
-                </MagneticButton>
-                <MagneticButton
-                  href="https://www.linkedin.com/in/hectorpugh"
-                  external
-                  className="flex items-center gap-2 hover:text-cyan-400 transition-colors duration-300 text-lg"
-                >
-                  <Linkedin className="w-5 h-5" />
-                  hectorpugh
-                </MagneticButton>
-                <MagneticButton
-                  href="mailto:hectorpugh08@icloud.com"
-                  className="flex items-center gap-2 hover:text-cyan-400 transition-colors duration-300 text-lg"
-                >
-                  <Mail className="w-5 h-5" />
-                  hectorpugh08@icloud.com
-                </MagneticButton>
-              </div>
-
-              {/* Floating interaction elements */}
-              <div className="absolute top-8 right-8">
-                <div className="flex items-center gap-2 text-slate-500 text-sm">
-                  <MousePointer className="w-4 h-4" />
-                  <span>Hover to interact</span>
+                <div className="mt-8 pt-8 border-t border-slate-800">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a
+                      href="mailto:contact@duke-tech.com"
+                      className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/25 flex items-center gap-3 justify-center"
+                    >
+                      <Mail className="w-5 h-5" />
+                      Start a Project
+                    </a>
+                    
+                    <a
+                      href="https://github.com/duke-tech"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-slate-800/80 hover:bg-slate-700/80 border-2 border-slate-700 hover:border-orange-500 px-8 py-4 rounded-xl text-slate-300 hover:text-white font-bold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm flex items-center gap-3 justify-center"
+                    >
+                      <Github className="w-5 h-5" />
+                      View Code
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <footer className="text-center text-slate-500 py-12 border-t border-slate-800/50 mt-32">
+        <footer className="text-center text-slate-500 py-12 border-t border-slate-800/50">
           <div className="space-y-4">
-            <p className="text-lg">© 2025 Hector Pugh. Crafted with passion, precision, and a touch of magic.</p>
             <div className="flex justify-center items-center gap-2">
-              <PulsingOrb size="w-2 h-2" color="bg-cyan-400" />
-              <span className="text-sm">Powered by imagination and caffeine</span>
-              <PulsingOrb size="w-2 h-2" color="bg-emerald-400" delay={1} />
+              <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+              <span>© 2025 Duke - Professional Tech Solutions</span>
+              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
             </div>
+            <p className="text-sm">Built with precision. No shortcuts, no compromises.</p>
           </div>
         </footer>
       </div>
