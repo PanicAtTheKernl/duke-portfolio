@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <title>
-          Coded By Duke.
+          CodedByDuke | IT Solutions.
         </title>
       </Head>
       <body className="antialiased">
