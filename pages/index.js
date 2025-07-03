@@ -313,7 +313,7 @@ export default function DukeProfessionalPortfolio() {
             </div>
             
             <p className="text-xl text-slate-400 leading-relaxed max-w-3xl mx-auto">
-              17-year-old tech specialist delivering <span className="text-orange-400 font-semibold">no-BS solutions</span> in hardware repair, 
+              Young, enthusiastic tech specialist delivering <span className="text-orange-400 font-semibold">excellent solutions</span> in hardware repair, 
               Linux development, and performance optimization. Zero shortcuts, maximum results.
             </p>
             
@@ -369,7 +369,7 @@ export default function DukeProfessionalPortfolio() {
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-4">The Direct Approach</h3>
                   <p className="text-slate-300 leading-relaxed">
-                    I'm Duke, 17 years old, and I don't believe in sugar-coating or taking shortcuts. 
+                    I'm Duke, and I don't believe in sugar-coating or taking shortcuts. 
                     When your tech breaks, when your code fails, or when your system needs optimization—I deliver solutions that work.
                   </p>
                 </div>
@@ -606,7 +606,7 @@ export default function DukeProfessionalPortfolio() {
                 <div className="mt-8 pt-8 border-t border-slate-800">
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <a
-                      href="mailto:contact@duke-tech.com"
+                      href="mailto:hectorpugh08@icloud.com"
                       className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/25 flex items-center gap-3 justify-center"
                     >
                       <Mail className="w-5 h-5" />
@@ -614,7 +614,7 @@ export default function DukeProfessionalPortfolio() {
                     </a>
                     
                     <a
-                      href="https://github.com/duke-tech"
+                      href="https://github.com/codedbyduke"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-slate-800/80 hover:bg-slate-700/80 border-2 border-slate-700 hover:border-orange-500 px-8 py-4 rounded-xl text-slate-300 hover:text-white font-bold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm flex items-center gap-3 justify-center"
