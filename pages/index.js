@@ -389,7 +389,7 @@ export default function DukeBritishPortfolio() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">OS:</span>
-                    <span className="text-white">Linux Debian</span>
+                    <span className="text-white">Linux Fedora</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">STATUS:</span>
