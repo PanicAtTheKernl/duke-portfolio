@@ -40,10 +40,12 @@ import {
   ArrowRight,
   Quote,
   Menu,
-  X
+  X,
+  AlertTriangle,
+  Skull
 } from 'lucide-react';
 
-const TypewriterText = ({ text, delay = 50 }) => {
+const TypewriterText = ({ text, delay = 80 }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
@@ -61,46 +63,46 @@ const TypewriterText = ({ text, delay = 50 }) => {
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setShowCursor(prev => !prev);
-    }, 500);
+    }, 600);
     return () => clearInterval(cursorInterval);
   }, []);
 
   return (
-    <span>
+    <span className="font-mono">
       {displayText}
-      <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>|</span>
+      <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>_</span>
     </span>
   );
 };
 
-const ServiceCard = ({ icon: Icon, title, description, features, gradient }) => {
+const ServiceCard = ({ icon: Icon, title, description, features, price }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div 
-      className="group relative bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-800 hover:border-orange-500/50 transition-all duration-500 hover:transform hover:scale-[1.02]"
+      className="bg-black border-2 border-red-600 p-6 shadow-lg transition-all duration-300 hover:shadow-red-600/50 hover:shadow-xl hover:border-red-400"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-slate-900/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      
-      <div className="relative z-10">
-        <div className={`w-16 h-16 bg-gradient-to-r ${gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-          <Icon className="w-8 h-8 text-white" />
+      <div className="flex items-center gap-4 mb-4">
+        <div className="w-12 h-12 bg-red-600 border-2 border-red-400 flex items-center justify-center">
+          <Icon className="w-6 h-6 text-black" />
         </div>
-        
-        <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-orange-400 transition-colors duration-300">
-          {title}
-        </h3>
-        
-        <p className="text-slate-400 mb-6 leading-relaxed">
-          {description}
-        </p>
-        
+        <div>
+          <h3 className="text-xl font-bold text-white uppercase tracking-wide">{title}</h3>
+          <div className="text-red-400 font-mono text-sm">{price}</div>
+        </div>
+      </div>
+      
+      <p className="text-gray-300 mb-4 leading-relaxed">
+        {description}
+      </p>
+      
+      <div className="border-t border-red-800 pt-4">
         <ul className="space-y-2">
           {features.map((feature, index) => (
-            <li key={index} className="flex items-center gap-3 text-slate-300">
-              <CheckCircle className="w-4 h-4 text-orange-500 flex-shrink-0" />
+            <li key={index} className="flex items-start gap-2 text-gray-300">
+              <span className="text-red-500 font-bold">»</span>
               <span>{feature}</span>
             </li>
           ))}
@@ -108,81 +110,54 @@ const ServiceCard = ({ icon: Icon, title, description, features, gradient }) => 
       </div>
       
       {isHovered && (
-        <div className="absolute top-4 right-4">
-          <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+        <div className="absolute top-2 right-2">
+          <div className="w-3 h-3 bg-red-500 animate-pulse"></div>
         </div>
       )}
     </div>
   );
 };
 
-const ProjectCard = ({ title, description, tech, type, status = "Completed" }) => {
+const ProjectCard = ({ title, description, tech, type, year, status = "COMPLETE" }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div 
-      className="bg-slate-900/90 backdrop-blur-sm rounded-xl p-6 border border-slate-800 hover:border-orange-500/50 transition-all duration-300 hover:transform hover:scale-[1.02] group"
+      className="bg-black border-2 border-gray-600 p-5 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-600/30"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
-          <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
-          <span className="text-sm font-medium text-orange-400 uppercase tracking-wide">{type}</span>
+          <div className="w-3 h-3 bg-red-500 animate-pulse"></div>
+          <span className="text-red-400 font-mono text-sm uppercase">{type}</span>
         </div>
-        <span className="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded-full">{status}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-gray-500 font-mono text-xs">{year}</span>
+          <span className="text-xs bg-red-600 text-black px-2 py-1 font-bold uppercase">{status}</span>
+        </div>
       </div>
       
-      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors duration-300">
+      <h3 className="text-lg font-bold text-white mb-2 uppercase">
         {title}
       </h3>
       
-      <p className="text-slate-400 mb-4 leading-relaxed">
+      <p className="text-gray-400 mb-3 text-sm">
         {description}
       </p>
       
-      <div className="flex flex-wrap gap-2">
-        {tech.map((item, index) => (
-          <span key={index} className="text-xs bg-slate-800/80 text-slate-300 px-3 py-1 rounded-full border border-slate-700">
-            {item}
-          </span>
-        ))}
-      </div>
-      
-      {isHovered && (
-        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <ArrowRight className="w-4 h-4 text-orange-500" />
+      <div className="border-t border-gray-800 pt-3">
+        <div className="flex flex-wrap gap-2">
+          {tech.map((item, index) => (
+            <span key={index} className="text-xs bg-gray-800 text-gray-300 px-2 py-1 border border-gray-700 font-mono">
+              {item}
+            </span>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };
-
-const TestimonialCard = ({ text, author, role, rating = 5 }) => (
-  <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl p-6 border border-slate-800">
-    <div className="flex items-center gap-1 mb-4">
-      {[...Array(rating)].map((_, i) => (
-        <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />
-      ))}
-    </div>
-    
-    <Quote className="w-8 h-8 text-orange-500/30 mb-4" />
-    
-    <p className="text-slate-300 mb-4 leading-relaxed italic">
-      "{text}"
-    </p>
-    
-    <div className="flex items-center gap-3">
-      <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center">
-        <User className="w-5 h-5 text-white" />
-      </div>
-      <div>
-        <div className="font-semibold text-white">{author}</div>
-        <div className="text-sm text-slate-400">{role}</div>
-      </div>
-    </div>
-  </div>
-);
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -202,22 +177,22 @@ const Navigation = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-900/95 backdrop-blur-md border-b border-slate-800' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-6 py-4">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black border-b-2 border-red-600' : 'bg-transparent'}`}>
+      <div className="max-w-6xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
-              <Terminal className="w-5 h-5 text-white" />
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-red-600 border-2 border-red-400 flex items-center justify-center">
+              <Terminal className="w-5 h-5 text-black" />
             </div>
-            <span className="text-xl font-bold text-white">Duke</span>
+            <span className="text-xl font-bold text-white font-mono">DUKE.EXE</span>
           </div>
           
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {['about', 'services', 'portfolio', 'contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-slate-300 hover:text-orange-400 transition-colors duration-300 capitalize font-medium"
+                className="text-gray-300 hover:text-red-400 transition-colors duration-300 uppercase font-bold text-sm border-b-2 border-transparent hover:border-red-400"
               >
                 {item}
               </button>
@@ -233,13 +208,13 @@ const Navigation = () => {
         </div>
         
         {isOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 py-4">
-            <div className="flex flex-col gap-4 px-6">
+          <div className="md:hidden bg-black border-t-2 border-red-600 py-4">
+            <div className="flex flex-col gap-3 px-4">
               {['about', 'services', 'portfolio', 'contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className="text-slate-300 hover:text-orange-400 transition-colors duration-300 capitalize font-medium text-left"
+                  className="text-gray-300 hover:text-red-400 transition-colors duration-300 uppercase font-bold text-sm text-left"
                 >
                   {item}
                 </button>
@@ -252,391 +227,401 @@ const Navigation = () => {
   );
 };
 
-export default function DukeProfessionalPortfolio() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+export default function DukeBritishPortfolio() {
+  const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white overflow-hidden">
+    <div className="min-h-screen bg-black text-white font-sans">
       <Navigation />
       
-      {/* Animated background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-0 right-1/3 w-60 h-60 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
-        
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: 'linear-gradient(90deg, rgba(251, 146, 60, 0.1) 1px, transparent 1px), linear-gradient(rgba(251, 146, 60, 0.1) 1px, transparent 1px)',
-          backgroundSize: '50px 50px'
+      {/* Retro grid background */}
+      <div className="fixed inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(90deg, #dc2626 1px, transparent 1px), linear-gradient(#dc2626 1px, transparent 1px)',
+          backgroundSize: '20px 20px'
         }}></div>
-        
-        {/* Mouse follower */}
-        <div 
-          className="absolute w-4 h-4 bg-orange-500/20 rounded-full blur-sm pointer-events-none transition-all duration-100 ease-out"
-          style={{
-            left: mousePos.x - 8,
-            top: mousePos.y - 8,
-          }}
-        />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-6xl mx-auto px-4">
         {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center pt-20">
+        <section className="min-h-screen flex items-center justify-center pt-16">
           <div className="text-center space-y-8 max-w-4xl">
-            <div className="space-y-4">
-              <div className="flex items-center justify-center gap-3 mb-8">
-                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
-                  <Terminal className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-xl text-slate-400">Professional Tech Solutions</span>
+            {/* System Info Header */}
+            <div className="bg-black border-2 border-red-600 p-4 mb-8 font-mono text-sm">
+              <div className="flex justify-between items-center">
+                <span className="text-red-400">SYSTEM STATUS: ONLINE</span>
+                <span className="text-gray-400">{time.toLocaleTimeString()}</span>
               </div>
-              
-              <h1 className="text-6xl md:text-8xl font-black tracking-tight">
-                <span className="bg-gradient-to-r from-orange-400 via-red-400 to-orange-300 bg-clip-text text-transparent">
-                  Duke
-                </span>
-              </h1>
-              
-              <div className="text-2xl md:text-3xl text-slate-300 font-light">
-                <TypewriterText text="Tech Repair • Coding • Gaming Solutions" delay={80} />
+              <div className="text-gray-500 text-xs mt-1">
+                ThinkPad T480 | i7-8650U | 16GB RAM | Linux Debian
+              </div>
+            </div>
+
+            {/* Warning Banner */}
+            <div className="bg-red-600 text-black p-3 border-2 border-red-400 mb-8">
+              <div className="flex items-center gap-2 justify-center">
+                <AlertTriangle className="w-5 h-5" />
+                <span className="font-bold">NOT THE BLOODY MUSICIAN</span>
+              </div>
+              <div className="text-sm mt-1">
+                Looking for the artist Hector Pugh? Try Spotify, mate.
               </div>
             </div>
             
-            <p className="text-xl text-slate-400 leading-relaxed max-w-3xl mx-auto">
-              Young, enthusiastic tech specialist delivering <span className="text-orange-400 font-semibold">excellent solutions</span> in hardware repair, 
-              Linux development, and performance optimization. Zero shortcuts, maximum results.
-            </p>
+            <div className="space-y-6">
+              <h1 className="text-6xl md:text-8xl font-black tracking-tight font-mono">
+                <span className="text-red-500">DUKE</span>
+              </h1>
+              
+              <div className="text-xl md:text-2xl text-gray-300 font-mono border-2 border-gray-600 p-4 bg-black">
+                <TypewriterText text="TECH_REPAIR.EXE | CODING.BAT | GAMING_OPT.SH" delay={60} />
+              </div>
+            </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+            <div className="bg-black border-2 border-red-600 p-6 max-w-3xl mx-auto">
+              <p className="text-gray-300 leading-relaxed">
+                Young tech bloke. No corporate bollocks. No Windows. Linux only. 
+                Hardware gets fixed. Code gets written. Performance gets optimized. 
+                <span className="text-red-400 font-bold"> Zero compromises.</span>
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
               <button 
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/25 flex items-center gap-3 justify-center"
+                className="bg-red-600 hover:bg-red-500 border-2 border-red-400 px-8 py-3 text-black font-bold text-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/50 flex items-center gap-3 justify-center uppercase"
               >
                 <Mail className="w-5 h-5" />
-                Get Solutions
+                GET SORTED
               </button>
               
               <button 
                 onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-slate-800/80 hover:bg-slate-700/80 border-2 border-slate-700 hover:border-orange-500 px-8 py-4 rounded-xl text-slate-300 hover:text-white font-bold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm flex items-center gap-3 justify-center"
+                className="bg-black border-2 border-red-600 hover:border-red-400 px-8 py-3 text-red-400 hover:text-red-300 font-bold text-lg transition-all duration-300 flex items-center gap-3 justify-center uppercase"
               >
                 <Code className="w-5 h-5" />
-                View Work
+                VIEW PROJECTS
               </button>
             </div>
             
-            <div className="flex justify-center items-center gap-8 pt-8 text-slate-500">
+            <div className="flex justify-center items-center gap-6 pt-6 text-gray-500 text-sm font-mono">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span>Available</span>
+                <div className="w-2 h-2 bg-green-500 animate-pulse"></div>
+                <span>STATUS: AVAILABLE</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>UK Based</span>
+                <span>LOCATION: UK</span>
               </div>
               <div className="flex items-center gap-2">
-                <Gamepad2 className="w-4 h-4" />
-                <span>Gaming Enthusiast</span>
+                <Skull className="w-4 h-4" />
+                <span>WINDOWS: DEAD</span>
               </div>
             </div>
           </div>
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-20 space-y-16">
+        <section id="about" className="py-16 space-y-12">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">About Me</h2>
-            <p className="text-xl text-slate-400">Direct approach, proven results</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-red-500 font-mono uppercase">ABOUT.TXT</h2>
+            <div className="w-24 h-1 bg-red-600 mx-auto"></div>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
             <div className="space-y-6">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-2xl blur-xl"></div>
-                <div className="relative bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-800">
-                  <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mb-6">
-                    <User className="w-10 h-10 text-white" />
+              <div className="bg-black border-2 border-red-600 p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-red-600 border-2 border-red-400 flex items-center justify-center">
+                    <User className="w-6 h-6 text-black" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">The Direct Approach</h3>
-                  <p className="text-slate-300 leading-relaxed">
-                    I'm Duke, and I don't believe in sugar-coating or taking shortcuts. 
-                    When your tech breaks, when your code fails, or when your system needs optimization—I deliver solutions that work.
-                  </p>
+                  <h3 className="text-xl font-bold text-white uppercase">THE FACTS</h3>
                 </div>
+                <p className="text-gray-300 leading-relaxed">
+                  I'm Duke. I fix tech that's buggered. I write code that works. I optimize systems that drag. 
+                  No marketing waffle. No fancy graphics. Just proper results.
+                </p>
+              </div>
+              
+              <div className="bg-black border-2 border-gray-600 p-6">
+                <h4 className="text-lg font-bold text-red-400 mb-3 uppercase">CORE VALUES</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 font-bold">»</span>
+                    <span>Windows is dead. Linux is life.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 font-bold">»</span>
+                    <span>Hardware should work at maximum capacity.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 font-bold">»</span>
+                    <span>Code should be efficient and functional.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 font-bold">»</span>
+                    <span>No shortcuts. No compromises.</span>
+                  </li>
+                </ul>
               </div>
             </div>
             
             <div className="space-y-6">
-              <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl p-6 border border-slate-800">
-                <h4 className="text-lg font-semibold text-orange-400 mb-3">Core Philosophy</h4>
-                <p className="text-slate-300">
-                  "Windows is dead to me. Linux is life. Hardware should be pushed to its limits, 
-                  and software should be crafted with precision. No compromises, no excuses."
-                </p>
-              </div>
-              
-              <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl p-6 border border-slate-800">
-                <h4 className="text-lg font-semibold text-orange-400 mb-3">What Drives Me</h4>
-                <p className="text-slate-300">
-                  Breaking down complex problems, optimizing performance, and building custom solutions 
-                  from scratch. Every project gets my full attention and expertise.
-                </p>
-              </div>
-              
-              <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl p-6 border border-slate-800">
-                <h4 className="text-lg font-semibold text-orange-400 mb-3">Battle Station</h4>
-                <div className="flex items-center gap-3 text-slate-300">
-                  <Monitor className="w-5 h-5 text-orange-500" />
-                  <span>Lenovo ThinkPad T480 • i7-8650U • 16GB RAM</span>
+              <div className="bg-black border-2 border-red-600 p-6">
+                <h4 className="text-lg font-bold text-red-400 mb-3 uppercase">CURRENT SETUP</h4>
+                <div className="space-y-3 font-mono text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">MACHINE:</span>
+                    <span className="text-white">Lenovo ThinkPad T480</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">CPU:</span>
+                    <span className="text-white">Intel i7-8650U</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">RAM:</span>
+                    <span className="text-white">16GB DDR4</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">OS:</span>
+                    <span className="text-white">Linux Debian</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">STATUS:</span>
+                    <span className="text-green-400">OPTIMIZED</span>
+                  </div>
                 </div>
-                <p className="text-slate-400 text-sm mt-2">Solid, reliable, no BS—just like my work.</p>
+              </div>
+              
+              <div className="bg-black border-2 border-gray-600 p-6">
+                <h4 className="text-lg font-bold text-red-400 mb-3 uppercase">PHILOSOPHY</h4>
+                <p className="text-gray-300 text-sm font-mono">
+                  "If it's knackered, I'll fix it. If it's slow, I'll optimize it. 
+                  If it doesn't exist, I'll build it. Simple as that."
+                </p>
               </div>
             </div>
           </div>
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-20 space-y-16">
+        <section id="services" className="py-16 space-y-12">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">Services</h2>
-            <p className="text-xl text-slate-400">Expertise that delivers results</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-red-500 font-mono uppercase">SERVICES.DAT</h2>
+            <div className="w-24 h-1 bg-red-600 mx-auto"></div>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             <ServiceCard
               icon={Wrench}
-              title="Tech Repair"
-              description="Hardware diagnostics, component replacement, and system optimization. I fix what others can't."
+              title="TECH REPAIR"
+              description="Hardware diagnostics, component replacement, system optimization. I fix what others bin."
+              price="£20-50/hour"
               features={[
-                "Hardware diagnostics & repair",
-                "Component upgrades & replacements",
-                "Performance optimization",
-                "System troubleshooting",
+                "Complete hardware diagnostics",
+                "Component upgrades & replacements", 
+                "System performance optimization",
+                "Troubleshooting & problem solving",
                 "Custom build consultations"
               ]}
-              gradient="from-orange-500 to-red-500"
             />
             
             <ServiceCard
               icon={Terminal}
-              title="Development"
-              description="Linux-focused software development, automation, and custom tool creation. Built right, built to last."
+              title="DEVELOPMENT"
+              description="Linux-focused development, automation, custom tools. Built to last, built to work properly."
+              price="£25-60/hour"
               features={[
                 "Linux system development",
-                "Bot creation & automation",
-                "Custom script development",
+                "Discord bot creation",
+                "Automation scripts",
                 "API integrations",
-                "Performance optimization"
+                "Performance optimization tools"
               ]}
-              gradient="from-red-500 to-orange-500"
             />
             
             <ServiceCard
               icon={Gamepad2}
-              title="Gaming Solutions"
-              description="Performance tuning, custom configurations, and gaming setup optimization for competitive edge."
+              title="GAMING OPT"
+              description="Performance tuning, configuration optimization. Making your rig actually competitive."
+              price="£30-40/session"
               features={[
                 "Gaming PC optimization",
-                "Custom configuration setups",
+                "Custom config setups",
                 "Performance tuning",
                 "Competitive gaming prep",
-                "Hardware recommendations"
+                "Hardware upgrade advice"
               ]}
-              gradient="from-orange-600 to-red-600"
             />
           </div>
         </section>
 
         {/* Portfolio Section */}
-        <section id="portfolio" className="py-20 space-y-16">
+        <section id="portfolio" className="py-16 space-y-12">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">Portfolio</h2>
-            <p className="text-xl text-slate-400">Projects that prove the point</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-red-500 font-mono uppercase">PROJECTS.LOG</h2>
+            <div className="w-24 h-1 bg-red-600 mx-auto"></div>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <ProjectCard
-              title="Custom Linux Bot Framework"
-              description="Built a comprehensive Discord bot framework with advanced automation features and Linux system integration."
-              tech={["Python", "Discord.py", "Linux", "SQLite", "API Integration"]}
-              type="Development"
-              status="Active"
+              title="DISCORD BOT FRAMEWORK"
+              description="Comprehensive bot system with automation, moderation, and custom commands. Python-based, Linux optimized."
+              tech={["Python", "Discord.py", "SQLite", "Linux"]}
+              type="DEV"
+              year="2024"
+              status="ACTIVE"
             />
             
             <ProjectCard
-              title="Hardware Diagnostic Suite"
-              description="Developed custom diagnostic tools for rapid hardware fault detection and performance analysis."
-              tech={["Python", "System Monitoring", "Hardware APIs", "Logging"]}
-              type="Tech Repair"
-              status="Completed"
+              title="HARDWARE DIAGNOSTIC SUITE"
+              description="Custom tools for rapid hardware fault detection and performance analysis. CLI-based for maximum efficiency."
+              tech={["Python", "System APIs", "Bash", "Monitoring"]}
+              type="REPAIR"
+              year="2024"
+              status="COMPLETE"
             />
             
             <ProjectCard
-              title="Gaming Performance Optimizer"
-              description="Created automated scripts for optimizing gaming performance across multiple system configurations."
-              tech={["Bash", "System Optimization", "Performance Monitoring"]}
-              type="Gaming"
-              status="Ongoing"
+              title="GAMING PERFORMANCE OPTIMIZER"
+              description="Automated scripts for gaming performance optimization across different hardware configurations."
+              tech={["Bash", "Python", "System Tuning"]}
+              type="GAMING"
+              year="2024"
+              status="ONGOING"
             />
             
             <ProjectCard
-              title="Client System Overhauls"
-              description="Complete system rebuilds and optimizations for improved performance and reliability."
-              tech={["Hardware Repair", "Linux Installation", "Performance Tuning"]}
-              type="Tech Repair"
-              status="Multiple Projects"
+              title="CLIENT SYSTEM OVERHAULS"
+              description="Complete system rebuilds with Linux installations, performance tuning, and hardware upgrades."
+              tech={["Linux", "Hardware", "Optimization"]}
+              type="REPAIR"
+              year="2024"
+              status="MULTIPLE"
             />
             
             <ProjectCard
-              title="Automation Scripts Collection"
-              description="Suite of productivity and system maintenance scripts for Linux environments."
-              tech={["Bash", "Python", "Cron", "System Administration"]}
-              type="Development"
-              status="Expanding"
+              title="AUTOMATION SCRIPT COLLECTION"
+              description="Suite of productivity and maintenance scripts for Linux environments. Open source contributions."
+              tech={["Bash", "Python", "Cron", "Git"]}
+              type="DEV"
+              year="2023-24"
+              status="EXPANDING"
             />
             
             <ProjectCard
-              title="Custom Tool Development"
-              description="Bespoke software solutions for specific client needs and workflow optimization."
-              tech={["Python", "Custom APIs", "Database Integration"]}
-              type="Development"
-              status="Various"
-            />
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section className="py-20 space-y-16">
-          <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">Client Feedback</h2>
-            <p className="text-xl text-slate-400">Results speak louder than words</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <TestimonialCard
-              text="Duke fixed my laptop when three other repair shops couldn't. Direct, professional, and actually knows what he's doing."
-              author="Sarah M."
-              role="Local Business Owner"
-              rating={5}
-            />
-            
-            <TestimonialCard
-              text="Needed a custom bot for my server. Duke delivered exactly what I asked for, no fluff, just results."
-              author="Gaming Community Lead"
-              role="Discord Server Admin"
-              rating={5}
-            />
-            
-            <TestimonialCard
-              text="System was running like garbage. Duke optimized everything and now it's faster than when I bought it."
-              author="Tech Enthusiast"
-              role="Hardware Collector"
-              rating={5}
+              title="CUSTOM TOOL DEVELOPMENT"
+              description="Bespoke software solutions for specific client needs. Command-line focused, maximum efficiency."
+              tech={["Python", "C", "APIs", "CLI"]}
+              type="DEV"
+              year="2024"
+              status="VARIOUS"
             />
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 space-y-12">
+        <section id="contact" className="py-16 space-y-12">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">Get In Touch</h2>
-            <p className="text-xl text-slate-400">Ready to solve your tech problems?</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-red-500 font-mono uppercase">CONTACT.EXE</h2>
+            <div className="w-24 h-1 bg-red-600 mx-auto"></div>
           </div>
           
           <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-2xl blur-2xl"></div>
-              <div className="relative bg-slate-900/90 backdrop-blur-sm rounded-2xl p-8 border border-slate-800">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <h3 className="text-2xl font-bold text-white">Let's Talk Solutions</h3>
-                    <p className="text-slate-400">
-                      Got a tech problem that needs solving? Need custom development work? 
-                      Want to optimize your gaming setup? Let's cut through the BS and get it done.
-                    </p>
-                    
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3">
-                        <Mail className="w-5 h-5 text-orange-500" />
-                        <span className="text-slate-300">Available for project discussions</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Globe className="w-5 h-5 text-orange-500" />
-                        <span className="text-slate-300">Remote work preferred</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Zap className="w-5 h-5 text-orange-500" />
-                        <span className="text-slate-300">Quick turnaround times</span>
-                      </div>
-                    </div>
-                  </div>
+            <div className="bg-black border-2 border-red-600 p-8">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                  <h3 className="text-2xl font-bold text-white uppercase">GET IT SORTED</h3>
+                  <p className="text-gray-400">
+                    Got busted tech? Need custom code? Want gaming optimization? 
+                    No corporate waffle. Just proper solutions.
+                  </p>
                   
-                  <div className="space-y-6">
-                    <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-                      <h4 className="font-semibold text-orange-400 mb-2">What I Do Best</h4>
-                      <ul className="text-slate-300 space-y-1 text-sm">
-                        <li>• Hardware repair & diagnostics</li>
-                        <li>• Linux development & automation</li>
-                        <li>• Gaming optimization</li>
-                        <li>• Custom tool development</li>
-                        <li>• System troubleshooting</li>
-                      </ul>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 font-mono text-sm">
+                      <span className="text-red-500">»</span>
+                      <span className="text-gray-300">Quick response times</span>
                     </div>
-                    
-                    <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-                      <h4 className="font-semibold text-orange-400 mb-2">Work Style</h4>
-                      <p className="text-slate-300 text-sm">
-                        Direct communication, transparent pricing, and results-focused approach. 
-                        No corporate nonsense, just professional service.
-                      </p>
+                    <div className="flex items-center gap-3 font-mono text-sm">
+                      <span className="text-red-500">»</span>
+                      <span className="text-gray-300">No-nonsense pricing</span>
+                    </div>
+                    <div className="flex items-center gap-3 font-mono text-sm">
+                      <span className="text-red-500">»</span>
+                      <span className="text-gray-300">Remote work preferred</span>
+                    </div>
+                    <div className="flex items-center gap-3 font-mono text-sm">
+                      <span className="text-red-500">»</span>
+                      <span className="text-gray-300">Linux-focused solutions</span>
                     </div>
                   </div>
                 </div>
                 
-                <div className="mt-8 pt-8 border-t border-slate-800">
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a
-                      href="mailto:hectorpugh08@icloud.com"
-                      className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/25 flex items-center gap-3 justify-center"
-                    >
-                      <Mail className="w-5 h-5" />
-                      Start a Project
-                    </a>
-                    
-                    <a
-                      href="https://github.com/codedbyduke"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-slate-800/80 hover:bg-slate-700/80 border-2 border-slate-700 hover:border-orange-500 px-8 py-4 rounded-xl text-slate-300 hover:text-white font-bold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm flex items-center gap-3 justify-center"
-                    >
-                      <Github className="w-5 h-5" />
-                      View Code
-                    </a>
+                <div className="space-y-6">
+                  <div className="bg-gray-900 border border-gray-700 p-4">
+                    <h4 className="font-bold text-red-400 mb-2 uppercase">WHAT I DO</h4>
+                    <ul className="text-gray-300 text-sm space-y-1 font-mono">
+                      <li>• Hardware repair & diagnostics</li>
+                      <li>• Linux development & automation</li>
+                      <li>• Gaming performance optimization</li>
+                      <li>• Custom tool development</li>
+                      <li>• System troubleshooting</li>
+                    </ul>
                   </div>
+                  
+                  <div className="bg-gray-900 border border-gray-700 p-4">
+                    <h4 className="font-bold text-red-400 mb-2 uppercase">HOW I WORK</h4>
+                    <p className="text-gray-300 text-sm font-mono">
+                      Straight talk. Fair prices. Results-focused work. 
+                      No corporate bollocks. Just proper service.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-8 pt-6 border-t-2 border-red-800">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <a
+                    href="mailto:hectorpugh08@icloud.com"
+                    className="bg-red-600 hover:bg-red-500 border-2 border-red-400 px-8 py-3 text-black font-bold text-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/50 flex items-center gap-3 justify-center uppercase"
+                  >
+                    <Mail className="w-5 h-5" />
+                    START PROJECT
+                  </a>
+                  
+                  <a
+                    href="https://github.com/codedbyduke"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-black border-2 border-red-600 hover:border-red-400 px-8 py-3 text-red-400 hover:text-red-300 font-bold text-lg transition-all duration-300 flex items-center gap-3 justify-center uppercase"
+                  >
+                    <Github className="w-5 h-5" />
+                    VIEW CODE
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <footer className="text-center text-slate-500 py-12 border-t border-slate-800/50">
-          <div className="space-y-4">
-            <div className="flex justify-center items-center gap-2">
-              <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-              <span>© 2025 Duke - Professional Tech Solutions</span>
-              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <footer className="text-center text-gray-600 py-8 border-t-2 border-red-800">
+          <div className="space-y-3">
+            <div className="flex justify-center items-center gap-3 font-mono text-sm">
+              <span className="text-red-500">»</span>
+              <span>© 2025 DUKE.EXE - TECH SOLUTIONS</span>
+              <span className="text-red-500">«</span>
             </div>
-            <p className="text-sm">Built with precision. No shortcuts, no compromises.</p>
+            <p className="text-xs font-mono">BUILT WITH PRECISION. NO SHORTCUTS. NO COMPROMISES.</p>
+            <div className="flex justify-center items-center gap-2 text-xs font-mono text-gray-700">
+              <span>POWERED BY</span>
+              <div className="w-2 h-2 bg-red-600 animate-pulse"></div>
+              <span>LINUX</span>
+            </div>
           </div>
         </footer>
       </div>
