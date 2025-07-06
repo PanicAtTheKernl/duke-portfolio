@@ -258,7 +258,7 @@ export default function DukeBritishPortfolio() {
                 <span className="text-gray-400">{time.toLocaleTimeString()}</span>
               </div>
               <div className="text-gray-500 text-xs mt-1">
-                ThinkPad T480 | i7-8650U | 16GB RAM | Linux Debian
+                ThinkPad T480 | i7-8650U | 16GB RAM | Linux Fedora
               </div>
             </div>
 
