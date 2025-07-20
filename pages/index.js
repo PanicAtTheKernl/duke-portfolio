@@ -1,202 +1,282 @@
-import Head from 'next/head';
+import React from 'react';
 
-export default function SeizedNotice() {
+export default function RealisticSeizedNotice() {
   return (
-    <>
-      <Head>
-        <title>⚠️ OFFICIAL NOTICE: DOMAIN SEIZED BY FBI & CIA ⚠️</title>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+    <div style={{
+      fontFamily: "'Times New Roman', Times, serif",
+      backgroundColor: '#f8f8f8',
+      color: '#000',
+      margin: 0,
+      padding: 0,
+      minHeight: '100vh',
+      backgroundImage: `
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(255,255,0,0.03) 10px,
+          rgba(255,255,0,0.03) 20px
+        )
+      `,
+      userSelect: 'none'
+    }}>
+      <div style={{
+        maxWidth: '800px',
+        margin: '0 auto',
+        padding: '40px 20px',
+        backgroundColor: '#ffffff',
+        minHeight: '100vh',
+        boxShadow: '0 0 30px rgba(0,0,0,0.1)',
+        position: 'relative'
+      }}>
+        
+        {/* Header with FBI and DOJ seals */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '30px',
+          borderBottom: '3px solid #000',
+          paddingBottom: '20px'
+        }}>
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/FBI_Seal.svg/120px-FBI_Seal.svg.png"
+            alt="FBI Seal"
+            style={{ width: '80px', height: '80px' }}
+          />
+          <div style={{
+            textAlign: 'center',
+            flex: 1,
+            margin: '0 20px'
+          }}>
+            <h1 style={{
+              fontSize: '24px',
+              fontWeight: 'bold',
+              margin: '0',
+              textTransform: 'uppercase',
+              letterSpacing: '2px'
+            }}>
+              UNITED STATES DEPARTMENT OF JUSTICE
+            </h1>
+            <div style={{
+              fontSize: '16px',
+              fontWeight: 'normal',
+              marginTop: '5px'
+            }}>
+              Federal Bureau of Investigation
+            </div>
+          </div>
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Seal_of_the_United_States_Department_of_Justice.svg/120px-Seal_of_the_United_States_Department_of_Justice.svg.png"
+            alt="DOJ Seal"
+            style={{ width: '80px', height: '80px' }}
+          />
+        </div>
 
-          html, body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto Slab', serif;
-            background-color: #fff;
-            color: #000;
-            user-select: none;
-            -webkit-font-smoothing: antialiased;
-          }
+        {/* Main Notice */}
+        <div style={{
+          backgroundColor: '#cc0000',
+          color: 'white',
+          padding: '20px',
+          textAlign: 'center',
+          marginBottom: '30px',
+          border: '3px solid #990000',
+          boxShadow: 'inset 0 0 10px rgba(0,0,0,0.3)'
+        }}>
+          <h2 style={{
+            fontSize: '28px',
+            fontWeight: 'bold',
+            margin: '0 0 10px 0',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+          }}>
+            🚨 THIS DOMAIN HAS BEEN SEIZED 🚨
+          </h2>
+          <div style={{
+            fontSize: '18px',
+            fontWeight: 'bold',
+            textTransform: 'uppercase',
+            letterSpacing: '1px'
+          }}>
+            BY THE FEDERAL BUREAU OF INVESTIGATION
+          </div>
+        </div>
 
-          .container {
-            max-width: 720px;
-            margin: 60px auto 80px;
-            padding: 50px 60px 70px;
-            border: 10px solid #000;
-            position: relative;
-            box-sizing: border-box;
-            background: #fff;
-            box-shadow:
-              0 0 20px rgba(0, 0, 0, 0.1),
-              inset 0 0 15px rgba(0, 0, 0, 0.05);
-          }
+        {/* Case Information Box */}
+        <div style={{
+          backgroundColor: '#f0f0f0',
+          border: '2px solid #000',
+          padding: '20px',
+          marginBottom: '30px',
+          fontFamily: "'Courier New', monospace"
+        }}>
+          <h3 style={{
+            margin: '0 0 15px 0',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            textTransform: 'uppercase'
+          }}>
+            CASE INFORMATION
+          </h3>
+          <div style={{ lineHeight: '1.6' }}>
+            <div><strong>Case Number:</strong> FBI-2025-CY-783214-WDPA</div>
+            <div><strong>Operation:</strong> DIGITAL STRIKE</div>
+            <div><strong>Date of Seizure:</strong> July 20, 2025, 14:32 UTC</div>
+            <div><strong>Judicial Authority:</strong> U.S. District Court, Western District of Pennsylvania</div>
+            <div><strong>Warrant Number:</strong> 25-MJ-1847</div>
+          </div>
+        </div>
 
-          .seal {
-            position: absolute;
-            top: 40px;
-            right: 50px;
-            width: 120px;
-            opacity: 0.12;
-            filter: grayscale(100%) brightness(90%);
-            pointer-events: none;
-            user-select: none;
-            transform: rotate(-6deg);
-            z-index: 0;
-          }
+        {/* Legal Notice */}
+        <div style={{
+          backgroundColor: '#fff3cd',
+          border: '2px solid #856404',
+          borderLeft: '8px solid #ffc107',
+          padding: '20px',
+          marginBottom: '30px'
+        }}>
+          <h3 style={{
+            margin: '0 0 15px 0',
+            fontSize: '18px',
+            color: '#856404'
+          }}>
+            ⚠️ LEGAL NOTICE
+          </h3>
+          <p style={{
+            margin: '0',
+            lineHeight: '1.6',
+            fontSize: '14px'
+          }}>
+            This domain and its contents have been seized pursuant to a seizure warrant obtained by the 
+            Federal Bureau of Investigation and issued pursuant to 18 U.S.C. §§ 981 and 982 by the 
+            United States District Court for the Western District of Pennsylvania.
+          </p>
+        </div>
 
-          h1 {
-            font-size: 3.8rem;
-            font-weight: 900;
-            text-align: center;
-            letter-spacing: 6px;
-            margin: 0 0 12px;
-            z-index: 1;
-            position: relative;
-            text-shadow:
-              1px 1px 2px rgba(0, 0, 0, 0.15);
-          }
+        {/* Main Content */}
+        <div style={{ marginBottom: '40px' }}>
+          <p style={{
+            fontSize: '16px',
+            lineHeight: '1.7',
+            marginBottom: '20px',
+            textAlign: 'justify'
+          }}>
+            The domain identified in this notice was seized as part of an ongoing federal criminal 
+            investigation. The seizure was executed in accordance with federal laws governing the 
+            confiscation of property used in connection with criminal activity.
+          </p>
+          
+          <p style={{
+            fontSize: '16px',
+            lineHeight: '1.7',
+            marginBottom: '20px',
+            textAlign: 'justify'
+          }}>
+            All digital assets, databases, user information, and related materials previously hosted 
+            on this domain have been secured and preserved for evidentiary purposes. This action was 
+            taken following extensive investigation by federal law enforcement agencies.
+          </p>
 
-          h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin: 0 0 38px;
-            position: relative;
-            z-index: 1;
-          }
+          <div style={{
+            backgroundColor: '#d4edda',
+            border: '1px solid #c3e6cb',
+            borderLeft: '4px solid #28a745',
+            padding: '15px',
+            marginBottom: '20px'
+          }}>
+            <strong style={{ color: '#155724' }}>FOR THE PUBLIC:</strong>
+            <div style={{ marginTop: '10px', fontSize: '14px', color: '#155724' }}>
+              If you believe you may be a victim of criminal activity related to this domain, 
+              please contact the FBI's Internet Crime Complaint Center (IC3) at 
+              <a href="https://www.ic3.gov" style={{ color: '#155724', textDecoration: 'underline' }}>
+                www.ic3.gov
+              </a>
+            </div>
+          </div>
+        </div>
 
-          .case-info {
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: 700;
-            font-size: 1.1rem;
-            background: #f5f5f5;
-            border: 2px solid #000;
-            padding: 16px 26px;
-            max-width: 420px;
-            margin: 0 auto 40px;
-            box-shadow: inset 2px 2px 6px #ddd;
-            letter-spacing: 1.8px;
-            user-select: text;
-            position: relative;
-            z-index: 1;
-          }
+        {/* Warning Box */}
+        <div style={{
+          backgroundColor: '#f8d7da',
+          color: '#721c24',
+          border: '2px solid #f5c6cb',
+          borderLeft: '8px solid #dc3545',
+          padding: '20px',
+          marginBottom: '40px',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            fontSize: '20px',
+            fontWeight: 'bold',
+            marginBottom: '10px',
+            textTransform: 'uppercase',
+            letterSpacing: '1px'
+          }}>
+            🚫 WARNING 🚫
+          </div>
+          <div style={{ fontSize: '16px', lineHeight: '1.5' }}>
+            Attempting to access, modify, or interfere with seized digital assets may constitute 
+            a federal crime punishable by fine and imprisonment under 18 U.S.C. § 1030 and other 
+            applicable statutes.
+          </div>
+        </div>
 
-          p {
-            font-size: 1.25rem;
-            line-height: 1.7;
-            margin-bottom: 1.5em;
-            max-width: 720px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            z-index: 1;
-            user-select: text;
-          }
+        {/* Contact Information */}
+        <div style={{
+          backgroundColor: '#e9ecef',
+          border: '1px solid #dee2e6',
+          padding: '20px',
+          marginBottom: '30px'
+        }}>
+          <h3 style={{
+            margin: '0 0 15px 0',
+            fontSize: '16px',
+            textTransform: 'uppercase'
+          }}>
+            OFFICIAL CONTACT INFORMATION
+          </h3>
+          <div style={{ fontSize: '14px', lineHeight: '1.6' }}>
+            <div><strong>FBI Field Office:</strong> Pittsburgh Division</div>
+            <div><strong>Address:</strong> 3311 E Carson St, Pittsburgh, PA 15203</div>
+            <div><strong>Public Affairs:</strong> (412) 432-4000</div>
+            <div><strong>Online:</strong> <a href="https://www.fbi.gov">www.fbi.gov</a></div>
+          </div>
+        </div>
 
-          strong.highlight {
-            font-weight: 900;
-            color: #b30000;
-          }
-
-          .warning {
-            font-weight: 900;
-            color: #b30000;
-            font-size: 1.7rem;
-            text-align: center;
-            margin-top: 3em;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: flashRed 1.3s infinite alternate;
-            user-select: none;
-            text-shadow: 1px 1px 1px #700;
-            position: relative;
-            z-index: 1;
-          }
-
-          @keyframes flashRed {
-            0% { opacity: 1; }
-            100% { opacity: 0.4; }
-          }
-
-          footer {
-            margin-top: 6em;
-            font-size: 0.9rem;
-            color: #444;
-            text-align: center;
-            font-style: italic;
-            user-select: text;
-            max-width: 720px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            z-index: 1;
-          }
-
-          abbr {
-            border-bottom: 1px dotted #000;
-            cursor: help;
-            user-select: none;
-          }
-
-          a {
-            color: #000;
-            text-decoration: underline;
-            transition: color 0.2s ease;
-          }
-
-          a:hover {
-            color: #b30000;
-          }
-        `}</style>
-      </Head>
-
-      <main className="container" role="main" aria-labelledby="title">
-        <img
-          className="seal"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/FBI_Seal.svg/120px-FBI_Seal.svg.png"
-          alt="FBI Seal"
-        />
-        <h1 id="title">⚠️ NOTICE OF DOMAIN SEIZURE ⚠️</h1>
-        <h2>
-          Seized by the <abbr title="Federal Bureau of Investigation">FBI</abbr> &amp; <abbr title="Central Intelligence Agency">CIA</abbr>
-        </h2>
-
-        <section className="case-info" aria-label="Case and Investigation Reference Numbers" role="contentinfo">
-          <div>Case Number: <strong className="highlight">2025-FBI-783214</strong></div>
-          <div>Investigation ID: <strong className="highlight">CIA-INTEL-954321-X</strong></div>
-          <div>Effective Date: <strong className="highlight">July 20, 2025</strong></div>
-        </section>
-
-        <p>
-          This domain has been <strong className="highlight">seized and taken offline</strong> pursuant to a court order issued under{' '}
-          <a href="https://www.law.cornell.edu/uscode/text/18/981" target="_blank" rel="noopener noreferrer">
-            18 U.S.C. § 981
-          </a>
-          , following an ongoing federal investigation involving violations of United States criminal law.
-        </p>
-
-        <p>
-          All content previously hosted on this domain has been removed and preserved as evidence. Access to this domain is{' '}
-          <strong className="highlight">strictly prohibited</strong> under federal law.
-        </p>
-
-        <p className="warning" role="alert">
-          UNAUTHORIZED ACCESS OR ATTEMPT TO TAMPER WITH THIS DOMAIN MAY RESULT IN CRIMINAL PROSECUTION.
-        </p>
-
-        <footer>
-          For official inquiries, contact the <strong>U.S. Department of Justice</strong> at{' '}
-          <a href="https://www.justice.gov" target="_blank" rel="noopener noreferrer">
-            www.justice.gov
-          </a>.
-          <br /><br />
-          <small>Just kidding, I’m just working on the website. Thanks for your patience!</small>
-        </footer>
-      </main>
-    </>
+        {/* Footer with the reveal */}
+        <div style={{
+          borderTop: '2px solid #000',
+          paddingTop: '20px',
+          textAlign: 'center',
+          fontSize: '12px',
+          color: '#666'
+        }}>
+          <div style={{ marginBottom: '20px' }}>
+            <strong>DOCUMENT ID:</strong> FBI-SEIZURE-2025-07-20-14:32:15-EST
+          </div>
+          
+          <div style={{
+            backgroundColor: '#d1ecf1',
+            color: '#0c5460',
+            padding: '15px',
+            borderRadius: '5px',
+            border: '1px solid #bee5eb',
+            fontSize: '14px'
+          }}>
+            <div style={{ fontWeight: 'bold', marginBottom: '10px' }}>
+              😄 JUST KIDDING!
+            </div>
+            <div>
+              This site is temporarily down for maintenance. Thanks for your patience while I work on improvements!
+              <br />
+              <em>- Your friendly neighborhood developer</em>
+            </div>
+          </div>
+          
+          <div style={{ marginTop: '10px', fontSize: '11px' }}>
+            This is a parody maintenance page. Any resemblance to actual government seizure notices is purely coincidental.
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
