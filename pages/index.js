@@ -44,7 +44,7 @@ export default function UltraRealisticSeizedNotice() {
           }}>
             <div>
               <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/FBI_Seal.svg/120px-FBI_Seal.svg.png"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Seal_of_the_Federal_Bureau_of_Investigation.svg/640px-Seal_of_the_Federal_Bureau_of_Investigation.svg.png"
                 alt="FBI Seal"
                 style={{ width: '70px', height: '70px', marginRight: '20px', float: 'left' }}
               />
