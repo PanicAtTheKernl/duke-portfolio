@@ -55,7 +55,7 @@ export default function UltraRealisticSeizedNotice() {
                 <div style={{ fontSize: '14px', color: '#333', marginTop: '2px' }}>
                   United States Department of Justice
                 </div>
-                <div style={{ fontSize: '12px', color: '#666', marginTop: '2px', marginLeft: '80px' }}>
+                <div style={{ fontSize: '12px', color: '#666', marginTop: '2px', marginLeft: '90px' }}>
                   Cybercrime Division - Asset Forfeiture Unit
                 </div>
               </div>
