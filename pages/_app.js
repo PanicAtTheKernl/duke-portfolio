@@ -1,4 +1,5 @@
-import "@/styles/globals.css";
+
+import { Analytics } from "@vercel/analytics/next";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -9,6 +10,7 @@ export default function App({ Component, pageProps }) {
       color: '#222',
     }}>
       <Component {...pageProps} />
+      <Analytics />
     </div>
   );
 }
