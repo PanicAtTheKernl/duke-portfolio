@@ -1,41 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# duke-portfolio
+
+**codedbyduke.co.uk Portfolio**
+
+This is the professional portfolio site for Duke, a developer and designer. The site showcases Duke's skills, projects, and contact information, presented with a modern glassmorphic design and a fully responsive, fluent user experience.
+
+## Features
+
+- **Modern UI:** Glassmorphic (liquid glass) design, beautiful gradients, and smooth animations.
+- **Responsive Layout:** Works seamlessly on desktop and mobile devices.
+- **Contact & Social:** Easy access to email and GitHub links.
+- **API Ready:** Example API route included for future integrations.
+- **Vercel Analytics:** Integrated for privacy-friendly site analytics.
+- **Tailwind CSS:** Utility-first styling for rapid development and consistency.
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org) – React framework for fast, scalable web apps
+- [Tailwind CSS](https://tailwindcss.com) – Utility-first CSS framework
+- [Vercel Analytics](https://vercel.com/analytics) – Privacy-friendly analytics
 
 ## Getting Started
 
-First, run the development server:
+To run the site locally:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Customization
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- Edit `pages/index.js` for the main landing page.
+- Update `styles/globals.css` for global styles.
+- Add new pages or API routes in the `pages/` directory.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Deploy instantly on [Vercel](https://vercel.com) for best performance and global CDN.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
-# duke-portfolio
+This project is open source and available under the MIT License.
