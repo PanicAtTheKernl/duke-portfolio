@@ -4,530 +4,244 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duke - I Fix Shit That Other People Break</title>
-    <!-- This site is held together with caffeine, thermal paste, and pure hatred -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #0a0a0a;
-            color: #c0c0c0;
+            font-family: 'Courier New', monospace;
+            background-color: #000;
+            color: #ccc;
             line-height: 1.6;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            /* Built at 3AM after PulseAudio decided to stop working for no reason */
-            background-image: 
-                radial-gradient(circle at 20% 20%, rgba(120, 120, 120, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(120, 120, 120, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 60%, rgba(120, 120, 120, 0.03) 0%, transparent 50%);
-            animation: subtle-glow 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes subtle-glow {
-            0% { background-color: #0a0a0a; }
-            100% { background-color: #0b0b0b; }
         }
         
         h1 {
-            color: #ffffff;
-            font-size: 2.8em;
+            color: #fff;
+            font-size: 2em;
             margin-bottom: 10px;
-            font-weight: normal;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            animation: header-pulse 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes header-pulse {
-            0% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
-            100% { text-shadow: 0 0 30px rgba(255, 255, 255, 0.4); }
-        }
-        
-        .subtitle {
-            color: #888;
-            font-size: 1.1em;
-            margin-bottom: 20px;
-            font-style: italic;
-            opacity: 0.9;
-        }
-        
-        .disclaimer {
-            background: linear-gradient(135deg, #111 0%, #0d0d0d 100%);
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 40px;
-            color: #999;
-            font-size: 0.9em;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .disclaimer:hover {
-            border-color: #555;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
-            transform: translateY(-2px);
         }
         
         h2 {
-            color: #ffffff;
-            font-size: 1.6em;
-            margin: 40px 0 20px 0;
-            border-bottom: 2px solid #333;
-            padding-bottom: 8px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        h2:hover {
             color: #fff;
-            border-bottom-color: #555;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
         }
         
         h2::before {
             content: "$ ";
-            color: #888;
-            font-weight: bold;
+            color: #666;
         }
-
-        h2::after {
-            content: "";
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #666, #999);
-            transition: width 0.5s ease;
-        }
-
-        h2:hover::after {
-            width: 100%;
+        
+        h3 {
+            color: #fff;
+            font-size: 1.1em;
+            margin: 15px 0 5px 0;
         }
         
         p {
             margin-bottom: 15px;
-            transition: color 0.2s ease;
         }
-
-        p:hover {
-            color: #d0d0d0;
+        
+        .subtitle {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .disclaimer {
+            background-color: #111;
+            border: 1px solid #333;
+            padding: 15px;
+            margin-bottom: 30px;
+            color: #999;
         }
         
         .project {
-            margin-bottom: 30px;
-            padding: 20px;
-            padding-left: 25px;
-            border-left: 3px solid #333;
-            background: linear-gradient(135deg, rgba(20, 20, 20, 0.3) 0%, rgba(15, 15, 15, 0.5) 100%);
-            border-radius: 0 8px 8px 0;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -3px;
-            width: 3px;
-            height: 0;
-            background: linear-gradient(180deg, #666, #999);
-            transition: height 0.5s ease;
-        }
-
-        .project:hover::before {
-            height: 100%;
-        }
-
-        .project:hover {
-            border-left-color: #555;
-            background: linear-gradient(135deg, rgba(25, 25, 25, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%);
-            transform: translateX(5px);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .project h3 {
-            color: #fff;
-            font-size: 1.3em;
-            margin-bottom: 8px;
-            transition: color 0.2s ease;
-        }
-
-        .project:hover h3 {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        
-        .project p {
-            color: #aaa;
-            margin-bottom: 10px;
-        }
-        
-        .rant-list {
-            list-style: none;
-            margin-left: 0;
-        }
-        
-        .rant-list li {
-            margin-bottom: 15px;
-            padding: 12px 20px;
-            position: relative;
-            background: rgba(20, 20, 20, 0.3);
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            padding-left: 15px;
             border-left: 2px solid #333;
-        }
-
-        .rant-list li:hover {
-            background: rgba(25, 25, 25, 0.5);
-            border-left-color: #555;
-            transform: translateX(5px);
-            color: #d0d0d0;
-        }
-        
-        .rant-list li::before {
-            content: "• ";
-            color: #666;
-            position: absolute;
-            left: 8px;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .rant-list li:hover::before {
-            color: #888;
         }
         
         .tech-item {
-            margin-bottom: 20px;
-            padding: 15px 20px;
-            border-left: 3px solid #333;
-            background: linear-gradient(135deg, rgba(15, 15, 15, 0.3) 0%, rgba(20, 20, 20, 0.5) 100%);
-            border-radius: 0 8px 8px 0;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .tech-item::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -3px;
-            width: 3px;
-            height: 0;
-            background: linear-gradient(180deg, #555, #777);
-            transition: height 0.4s ease;
-        }
-
-        .tech-item:hover::before {
-            height: 100%;
-        }
-
-        .tech-item:hover {
-            border-left-color: #555;
-            background: linear-gradient(135deg, rgba(20, 20, 20, 0.4) 0%, rgba(25, 25, 25, 0.6) 100%);
-            transform: translateX(8px);
-            box-shadow: -8px 0 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 2px solid #333;
         }
         
         .tech-name {
             color: #fff;
             font-weight: bold;
-            font-size: 1.1em;
-            margin-bottom: 5px;
         }
         
         .tech-opinion {
-            color: #aaa;
+            color: #999;
             font-style: italic;
         }
         
-        .links {
+        ul {
             list-style: none;
+            padding: 0;
         }
         
-        .links li {
-            margin-bottom: 15px;
-            padding: 10px 0;
-            transition: all 0.2s ease;
+        li {
+            margin-bottom: 10px;
+            padding-left: 15px;
+            position: relative;
         }
-
-        .links li:hover {
-            transform: translateX(5px);
+        
+        li::before {
+            content: "• ";
+            color: #666;
+            position: absolute;
+            left: 0;
         }
         
         a {
-            color: #ffffff;
+            color: #fff;
             text-decoration: underline;
-            text-decoration-color: #666;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        a::after {
-            content: "";
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #888, #bbb);
-            transition: width 0.3s ease;
         }
         
         a:hover {
-            color: #fff;
-            text-decoration-color: #888;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-        }
-
-        a:hover::after {
-            width: 100%;
+            color: #ccc;
         }
         
         .footer {
-            margin-top: 60px;
+            margin-top: 50px;
             padding-top: 20px;
             border-top: 1px solid #333;
             color: #666;
-            font-size: 0.9em;
             text-align: center;
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.5) 0%, rgba(15, 15, 15, 0.3) 100%);
-            border-radius: 8px;
-            padding: 20px;
         }
         
         .easter-egg {
-            color: #444;
+            color: #333;
             font-size: 0.8em;
             margin-top: 15px;
-            transition: color 0.3s ease;
-        }
-
-        .easter-egg:hover {
-            color: #666;
-        }
-
-        /* Smooth scrolling and selection */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        ::selection {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-        }
-
-        /* Cool terminal cursor effect */
-        .terminal-cursor {
-            display: inline-block;
-            width: 12px;
-            height: 20px;
-            background: #888;
-            animation: blink 1s infinite;
-            margin-left: 5px;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
         }
         
-        /* Mobile responsiveness without the bullshit */
         @media (max-width: 600px) {
             body {
                 padding: 15px;
             }
             
             h1 {
-                font-size: 2.2em;
+                font-size: 1.8em;
             }
-            
-            .subtitle {
-                font-size: 1em;
-            }
-
-            .project, .tech-item {
-                padding: 15px;
-                margin-left: 0;
-            }
-
-            .rant-list li {
-                padding: 10px 15px;
-            }
-        }
-
-        /* Fancy fade-in animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Add staggered animations */
-        .project:nth-child(1) { animation-delay: 0.1s; }
-        .project:nth-child(2) { animation-delay: 0.2s; }
-        .project:nth-child(3) { animation-delay: 0.3s; }
-        .project:nth-child(4) { animation-delay: 0.4s; }
-        .project:nth-child(5) { animation-delay: 0.5s; }
-        .project:nth-child(6) { animation-delay: 0.6s; }
-        .project:nth-child(7) { animation-delay: 0.7s; }
-        .project:nth-child(8) { animation-delay: 0.8s; }
-
-        /* Subtle matrix-like background effect */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px),
-                linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: -1;
-            animation: matrix-move 20s linear infinite;
-        }
-
-        @keyframes matrix-move {
-            0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(50px) translateY(50px); }
         }
     </style>
 </head>
 <body>
-    <!-- Still better than whatever Wix generates -->
+    <h1>Hi, I'm Duke</h1>
+    <p class="subtitle">I fix shit that other people break. Sometimes I break it first.</p>
 
-    <h1 class="fade-in">Hi, I'm Duke<span class="terminal-cursor"></span></h1>
-    <p class="subtitle fade-in">I fix shit that other people break. Sometimes I break it first.</p>
-
-    <div class="disclaimer fade-in">
+    <div class="disclaimer">
         <strong>Fair warning:</strong> This isn't a polished corporate wank-fest. It's an actual portfolio by someone who's tired of pretending that modern web development isn't mostly bollocks.
     </div>
 
-    <h2 class="fade-in">About Me</h2>
-    <p class="fade-in">I'm Duke. Some call me Kernl or PanicAtTheKernl, depending on which corner of the internet they found me screaming into the void. I've been fixing computers since before "full-stack developer" became code for "I copied some React tutorials and now I think I'm clever."</p>
+    <h2>About Me</h2>
+    <p>I'm Duke. Some call me Kernl or PanicAtTheKernl, depending on which corner of the internet they found me screaming into the void. I've been fixing computers since before "full-stack developer" became code for "I copied some React tutorials and now I think I'm clever."</p>
 
-    <p class="fade-in">I fix things that shouldn't be broken, build things that probably shouldn't exist, and break things just to see if I can put them back together better. Most of my best work happens between midnight and 4AM, fueled by spite, caffeine, and the burning desire to make PulseAudio work properly for once in its miserable existence.</p>
+    <p>I fix things that shouldn't be broken, build things that probably shouldn't exist, and break things just to see if I can put them back together better. Most of my best work happens between midnight and 4AM, fueled by spite, caffeine, and the burning desire to make PulseAudio work properly for once in its miserable existence.</p>
 
-    <p class="fade-in">I believe good code should work without needing a bloody manual, websites should load faster than my patience runs out, and if your "revolutionary" startup idea requires 73 microservices to display a login form, you're part of the problem. Also, anyone who unironically uses "disruption" in a sentence deserves to have their laptop's thermal paste dry out.</p>
+    <p>I believe good code should work without needing a bloody manual, websites should load faster than my patience runs out, and if your "revolutionary" startup idea requires 73 microservices to display a login form, you're part of the problem. Also, anyone who unironically uses "disruption" in a sentence deserves to have their laptop's thermal paste dry out.</p>
 
-    <!-- No frameworks were harmed in the making of this site. Unlike my sanity. -->
+    <h2>Projects</h2>
+    <p>Here's some stuff I've built, mostly out of anger at existing solutions:</p>
 
-    <h2 class="fade-in">Projects</h2>
-    <p class="fade-in">Here's some stuff I've built, mostly out of anger at existing solutions:</p>
-
-    <div class="project fade-in">
+    <div class="project">
         <h3>System Recovery Toolkit</h3>
         <p>Born from pure rage after Windows Update killed my laptop for the third time in a month. Contains scripts that have saved more systems than Microsoft's own recovery tools ever will. Includes a bootable USB creator that actually fucking works and doesn't require 47 different ISO files.</p>
     </div>
 
-    <div class="project fade-in">
+    <div class="project">
         <h3>Network Diagnostic Suite</h3>
         <p>Built after spending six hours on the phone with Sky support trying to explain that their router was utter shite. Features network scanning tools that don't lie to you about connection quality and a WiFi analyzer that tells you exactly which neighbour is hogging all the bandwidth with their smart doorbell.</p>
     </div>
 
-    <div class="project fade-in">
+    <div class="project">
         <h3>IP Scourge</h3>
         <p>A Python script that hunts down Minecraft servers with the dedication of a tax inspector. Started as a quick hack to find servers after my mate gave me directions like "it's the one with the thing, you know?" Now it's basically network reconnaissance that I definitely don't use for anything dodgy, officer.</p>
     </div>
 
-    <div class="project fade-in">
+    <div class="project">
         <h3>Felix North</h3>
         <p>An AI character with more personality than most startup founders and none of the buzzword vomit. Built because I was sick of chatbots that sound like they were trained exclusively on LinkedIn thought leadership posts and TED talks about "digital transformation."</p>
     </div>
 
-    <div class="project fade-in">
+    <div class="project">
         <h3>Hardware Compatibility Checker</h3>
         <p>Exists because PC Part Picker isn't paranoid enough and I've watched too many people buy expensive paperweights. Includes a bullshit detector for marketing claims and real-world compatibility testing that actually matters. Will tell you if that RGB RAM is worth the extra £50 or if you're just paying for pretty lights.</p>
     </div>
 
-    <div class="project fade-in">
+    <div class="project">
         <h3>ThinkPad Fan Curve Tool</h3>
         <p>Created at 3AM after my T480 decided to sound like a jet engine during a Zoom call. Gives you proper fan control instead of relying on Lenovo's "thermal management" which apparently means "cook the CPU until it throttles." Works better than the official software, obviously.</p>
     </div>
 
-    <div class="project fade-in">
+    <div class="project">
         <h3>Custom Debian Builds</h3>
         <p>For when you want Linux that doesn't come with 400 packages you'll never use. Stripped down, optimized, and configured by someone who actually gives a shit about boot times. Comes with working audio drivers because apparently that's too much to ask from most distros.</p>
     </div>
 
-    <div class="project fade-in">
+    <div class="project">
         <h3>Performance Monitor That Actually Works</h3>
         <p>Built after getting fed up with system monitors that lie about CPU usage and memory consumption. This one tells you the truth, even when it hurts. Will ruthlessly call out which process is eating your RAM and why your SSD is crying.</p>
     </div>
 
-    <!-- Most of these projects are held together with duct tape and profanity -->
+    <h2>Tech Stack</h2>
+    <p>Here's what I actually use, not what looks good on a CV:</p>
 
-    <h2 class="fade-in">Tech Stack</h2>
-    <p class="fade-in">Here's what I actually use, not what looks good on a CV:</p>
-
-    <div class="tech-item fade-in">
+    <div class="tech-item">
         <div class="tech-name">Debian</div>
         <div class="tech-opinion">Stable, boring, and doesn't surprise you with random bullshit updates. Like a reliable car that starts every morning.</div>
     </div>
 
-    <div class="tech-item fade-in">
+    <div class="tech-item">
         <div class="tech-name">Arch Linux (formerly)</div>
         <div class="tech-opinion">Used it for years until I realized spending three hours fixing broken packages wasn't "learning," it was masochism.</div>
     </div>
 
-    <div class="tech-item fade-in">
+    <div class="tech-item">
         <div class="tech-name">Python</div>
         <div class="tech-opinion">Quick and dirty, like most of my solutions. Slower than molasses but faster to write than my will to live.</div>
     </div>
 
-    <div class="tech-item fade-in">
+    <div class="tech-item">
         <div class="tech-name">Java</div>
         <div class="tech-opinion">Corporate Stockholm syndrome. I hate it but it pays the bills and has more libraries than sense.</div>
     </div>
 
-    <div class="tech-item fade-in">
+    <div class="tech-item">
         <div class="tech-name">C++</div>
         <div class="tech-opinion">For when you want maximum performance and maximum suffering. Perfect for when Python is too slow and your sanity is optional.</div>
     </div>
 
-    <div class="tech-item fade-in">
+    <div class="tech-item">
         <div class="tech-name">Rust</div>
         <div class="tech-opinion">Makes you feel like an idiot until you suddenly feel like a god. The borrow checker is basically pair programming with a really pedantic mate.</div>
     </div>
 
-    <div class="tech-item fade-in">
+    <div class="tech-item">
         <div class="tech-name">Docker</div>
         <div class="tech-opinion">Containers for people who can't be arsed to set up proper deployment. Works everywhere, which is more than I can say for most things.</div>
     </div>
 
-    <div class="tech-item fade-in">
+    <div class="tech-item">
         <div class="tech-name">Vim</div>
         <div class="tech-opinion">The only text editor that doesn't treat me like I'm five years old. VS Code users can keep their mouse, I'll keep my dignity.</div>
     </div>
 
-    <div class="tech-item fade-in">
+    <div class="tech-item">
         <div class="tech-name">Git</div>
         <div class="tech-opinion">Version control for people who make mistakes. So, everyone. Still better than SVN, which isn't saying much.</div>
     </div>
 
-    <!-- If you're using nano in production, we need to have words -->
+    <h2>Brutal Truths</h2>
+    <p>Things I believe that will probably get me blocked on LinkedIn:</p>
 
-    <h2 class="fade-in">Brutal Truths</h2>
-    <p class="fade-in">Things I believe that will probably get me blocked on LinkedIn:</p>
-
-    <ul class="rant-list fade-in">
+    <ul>
         <li>JavaScript frameworks change faster than British weather and are about as predictable. Stop chasing the new shiny thing.</li>
         <li>If your website needs a loading spinner, you've already lost. This isn't 1998, and your users aren't that patient.</li>
         <li>Most "DevOps engineers" are just sysadmins who learned Docker commands and got better at marketing themselves.</li>
@@ -543,15 +257,13 @@
         <li>Kubernetes is overkill for 90% of applications. You don't need to orchestrate three containers, you need therapy.</li>
     </ul>
 
-    <!-- These opinions are objectively correct and I will die on these hills -->
-
-    <h2 class="fade-in">Links</h2>
-    <ul class="links fade-in">
+    <h2>Links</h2>
+    <ul>
         <li><a href="https://github.com/PanicAtTheKernl">GitHub</a> - Where my code lives and my hope for humanity slowly dies</li>
         <li><a href="https://x.com/PanicAtTheKernl">X (formerly Twitter)</a> - Angry tweets about technology and why everything is broken</li>
     </ul>
 
-    <div class="footer fade-in">
+    <div class="footer">
         <!-- This website was built with contempt for modern web development -->
         Built with disdain for modern web design, a healthy disrespect for authority, and way too much caffeine.
         <br><br>
@@ -571,45 +283,36 @@
         No dark patterns were implemented.
         No A/B tests were conducted on your patience.
         
-        This entire page is about 15KB now. Your average corporate website is still 4MB.
-        That's only a 250x difference now, but it looks 1000x better.
+        This entire page is 8KB. Your average corporate website is 4MB.
+        That's a 500x difference. Let that sink in while you wait for
+        Medium to load its 73rd tracking script.
         
         P.S. - If you're a recruiter and you made it this far, you're either
-        really bored or you actually understand what good web development looks like.
-        We should talk.
+        really desperate or you actually understand what good web development looks like.
+        We should talk. Unless you're from a blockchain startup. Then fuck off.
         
         P.P.S. - If you're here to steal my CSS, knock yourself out. It's not like
-        I invented dark themes and monospace fonts. But if you use it, at least
+        I invented black backgrounds and monospace fonts. But if you use it, at least
         give me credit for the attitude and the complete lack of JavaScript bullshit.
         
-        P.P.P.S. - This comment block is still longer than most people's entire CSS files.
-        I'm still not sorry. If anything, I'm even more proud.
+        P.P.P.S. - This comment block is longer than most people's entire JavaScript files.
+        I'm not sorry. If anything, I'm proud that I can write more useful comments
+        than most people can write useful code.
         
         P.P.P.P.S - If you work at Google, Facebook, or any other surveillance
         capitalism company and you're offended by this site, good. That was the point.
+        Go back to your standing desk and your kombucha.
         
-        P.P.P.P.P.S - Yes, I know there are still five P.S. statements. No, I still don't care.
-        This is still my website and I'll structure my closing comments however I bloody well please.
+        P.P.P.P.P.S - Yes, I know there are five P.S. statements. No, I don't care.
+        This is my website and I'll structure my closing comments however I bloody well please.
+        My HTML validates and loads fast. Can you say the same about your React app?
         
-        P.P.P.P.P.P.S - Now with 100% more visual polish and 0% more bullshit.
+        P.P.P.P.P.P.S - If you're using Internet Explorer to view this, I'm impressed
+        it still works but also concerned about your life choices. Please seek help.
+        
+        P.P.P.P.P.P.P.S - Still here? Go build something useful instead of reading
+        my rants. The world has enough broken websites already.
     -->
 
-    <script>
-        // The only JavaScript this site needs - fade in animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.fade-in');
-            elements.forEach((el, index) => {
-                el.style.animationDelay = (index * 0.1) + 's';
-            });
-
-            // Terminal cursor blink effect
-            const cursor = document.querySelector('.terminal-cursor');
-            if (cursor) {
-                setInterval(() => {
-                    cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-                }, 500);
-            }
-        });
-    </script>
 </body>
 </html>
