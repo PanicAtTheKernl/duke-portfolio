@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--Now time for some head, hehehehe-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -131,10 +132,10 @@
             }
         }
     </style>
-<!--Now time for some head, hehehehe-->
+    
 </head>
 <body>
-    <h1>Hi, I'm Duke</h1>
+    <h1>Hello, I'm Duke</h1>
     <p class="subtitle">I fix shit that other people break. Sometimes I break it first.</p>
 
     <div class="disclaimer">
@@ -142,18 +143,18 @@
     </div>
 
     <h2>About Me</h2>
-    <p>I'm Duke. Some call me Kernl or PanicAtTheKernl, depending on which corner of the internet they found me screaming into the void. I've been fixing computers since before "full-stack developer" became code for "I copied some React tutorials and now I think I'm clever."</p>
+    <p>I'm Duke. Some call me Kernl or PanicAtTheKernl, depending on which corner of the internet they found me screaming in. I've been fixing computers since before "full-stack developer" became code for "I copied some React tutorials and now I think I'm clever."</p>
 
     <p>I fix things that shouldn't be broken, build things that probably shouldn't exist, and break things just to see if I can put them back together better. Most of my best work happens between midnight and 4AM, fueled by spite, caffeine, and the burning desire to make PulseAudio work properly for once in its miserable existence.</p>
 
-    <p>I believe good code should work without needing a bloody manual, websites should load faster than my patience runs out, and if your "revolutionary" startup idea requires 73 microservices to display a login form, you're part of the problem. Also, anyone who unironically uses "disruption" in a sentence deserves to have their laptop's thermal paste dry out.</p>
+    <p>I believe good code should work without needing a fucking manual, websites should load faster than my patience runs out, and if your "revolutionary" startup idea requires 73 microservices to display a login form, you're part of the problem. Also, anyone who unironically uses "disruption" in a sentence deserves to have their computers thermal paste dry out.</p>
 
-    <h2>Projects</h2>
-    <p>Here's some stuff I've built, most of which is out of anger at existing solutions:</p>
+    <h2>Notable Projects</h2>
+    <p>Here's some stuff I've built, most of which was out of anger at existing solutions:</p>
 
     <div class="project">
-        <h3>System Recovery Toolkit</h3>
-        <p>Born from pure rage after Windows Update killed my laptop for the third time in a month. Contains scripts that have saved more systems than Microsoft's own recovery tools ever will. Includes a bootable USB creator that actually fucking works and doesn't require 47 different ISO files.</p>
+        <h3>System Diagnostic Tool</h3>
+        <p>Born from pure rage after Windows Update killed my laptop for the third time in a month. Contains several tools for diagnosing issues in your system, also contains a few system health checking tools. Includes a bootable USB creator that actually fucking works and doesn't require 47 different ISO files.</p>
     </div>
 
     <div class="project">
@@ -280,7 +281,7 @@
         
         P.P.S. - If you're here to steal my CSS, knock yourself out. It's not like
         I invented black backgrounds and monospace fonts. But if you use it, at least
-        give me credit for the attitude and the complete lack of JavaScript bullshit.
+        give me credit for the attitude and the complete lack of JavaScript.
         
         P.P.P.S. - This comment block is longer than most people's entire JavaScript files.
         I'm not sorry. If anything, I'm proud that I can write more useful comments
@@ -290,7 +291,7 @@
         capitalism company and you're offended by this site, good. That was the point.
         Go back to your standing desk and your kombucha.
         
-        P.P.P.P.P.S - Yes, I know there are five P.S. statements. No, I don't care.
+        P.P.P.P.P.S - Yes, I know there are seven P.S. statements. No, I don't care.
         This is my website and I'll structure my closing comments however I bloody well please.
         My HTML validates and loads fast. Can you say the same about your React app?
         
@@ -300,60 +301,5 @@
         P.P.P.P.P.P.P.S - Still here? Go build something useful instead of reading
         my rants. The world has enough broken websites already.
     -->
-<style>
-  #blackout {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: white;
-    z-index: 9998; 
-  }
-
-  #secret-iframe {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    border: none;
-    z-index: 9999;
-  }
-</style>
-
-<div id="blackout"></div>
-
-<iframe id="secret-iframe"></iframe>
-
-<script>
-  const secret = 'minecraft';
-  let buffer = '';
-  const blackout = document.getElementById('blackout');
-  const iframe = document.getElementById('secret-iframe');
-
-  document.addEventListener('keydown', e => {
-    buffer += e.key.toLowerCase();
-
-    if (buffer.length > secret.length) {
-      buffer = buffer.slice(buffer.length - secret.length);
-    }
-
-    if (buffer === secret) {
-      blackout.style.display = 'block';
-
-      setTimeout(() => {
-        iframe.src = '/secret/offline.html';  
-        iframe.style.display = 'block';
-      }, 200); 
-
-    }
-
-    if (e.key === 'Escape') {
-      iframe.style.display = 'none';
-      iframe.src = '';
-      blackout.style.display = 'none';
-    }
-  });
-</script>
-
 </body>
 </html>
