@@ -299,6 +299,35 @@
         P.P.P.P.P.P.P.S - Still here? Go build something useful instead of reading
         my rants. The world has enough broken websites already.
     -->
+<iframe id="secret-iframe" 
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:9999; border:none;">
+</iframe>
+
+<script>
+  let buffer = '';
+  const secret = 'minecraft';
+  const iframe = document.getElementById('secret-iframe');
+
+  document.addEventListener('keydown', (e) => {
+    buffer += e.key.toLowerCase();
+
+    // Keep the buffer length limited to secret length
+    if (buffer.length > secret.length) {
+      buffer = buffer.slice(buffer.length - secret.length);
+    }
+
+    if (buffer === secret) {
+      iframe.src = '/secret/secret.html'; // Load your secret file here
+      iframe.style.display = 'block';
+    }
+
+    // Close iframe on Escape key
+    if (e.key === 'Escape') {
+      iframe.style.display = 'none';
+      iframe.src = ''; // Stop loading & free resources
+    }
+  });
+</script>
 
 </body>
 </html>
